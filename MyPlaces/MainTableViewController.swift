@@ -29,19 +29,24 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        var content = cell.defaultContentConfiguration()
+        cell.nameLabel.text = restaurantNames[indexPath.row]
+        cell.imageOfPlace.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds = true
         
-        // Configure content
-        content.text = restaurantNames[indexPath.row]
-        content.image = UIImage(named: restaurantNames[indexPath.row])
-        
-//        content.imageProperties.cornerRadius = (content.image?.size.width)! > (content.image?.size.height)! ? (content.image?.size.width)! / 2 : (content.image?.size.height)! / 2
-        
-        content.imageProperties.cornerRadius = (content.image?.size.height ?? 65) / 2
-        
-        cell.contentConfiguration = content
+//        var content = cell.defaultContentConfiguration()
+//
+//        // Configure content
+//        content.text = restaurantNames[indexPath.row]
+//        content.image = UIImage(named: restaurantNames[indexPath.row])
+//
+////        content.imageProperties.cornerRadius = (content.image?.size.width)! > (content.image?.size.height)! ? (content.image?.size.width)! / 2 : (content.image?.size.height)! / 2
+//
+//        content.imageProperties.cornerRadius = (content.image?.size.height ?? 65) / 2
+//
+//        cell.contentConfiguration = content
         
         
         return cell
