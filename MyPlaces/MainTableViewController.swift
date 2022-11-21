@@ -9,10 +9,8 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    let restaurantNames = [
-        "Украинские Стравы", "Gorcafe 1654", "Корчма Качка", "Мир кофе",
-        "Портофино", "Кафе Библиотека", "Штефаньо", "GHdkf"
-    ]
+    
+    private let places = Place.getPlaces()
     
     
     override func viewDidLoad() {
@@ -24,29 +22,21 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaurantNames.count
+        return places.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.nameLabel.text = restaurantNames[indexPath.row]
-        cell.imageOfPlace.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.nameLabel.text = places[indexPath.row].name
+        cell.locationLabel.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
+        
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
-        
-//        var content = cell.defaultContentConfiguration()
-//
-//        // Configure content
-//        content.text = restaurantNames[indexPath.row]
-//        content.image = UIImage(named: restaurantNames[indexPath.row])
-//
-////        content.imageProperties.cornerRadius = (content.image?.size.width)! > (content.image?.size.height)! ? (content.image?.size.width)! / 2 : (content.image?.size.height)! / 2
-//
-//        content.imageProperties.cornerRadius = (content.image?.size.height ?? 65) / 2
-//
-//        cell.contentConfiguration = content
+
         
         
         return cell
@@ -90,9 +80,7 @@ class MainTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
+    
     
     /*
      // MARK: - Navigation
