@@ -11,7 +11,7 @@ class MainTableViewController: UITableViewController {
     
     let restaurantNames = [
         "Украинские Стравы", "Gorcafe 1654", "Корчма Качка", "Мир кофе",
-        "Портофино", "Кафе Библиотека", "Штефаньо"
+        "Портофино", "Кафе Библиотека", "Штефаньо", "GHdkf"
     ]
     
     
@@ -33,11 +33,16 @@ class MainTableViewController: UITableViewController {
         
         var content = cell.defaultContentConfiguration()
         
-        // Configure content.
-        content.image = UIImage(named: restaurantNames[indexPath.row])
+        // Configure content
         content.text = restaurantNames[indexPath.row]
+        content.image = UIImage(named: restaurantNames[indexPath.row])
+        
+//        content.imageProperties.cornerRadius = (content.image?.size.width)! > (content.image?.size.height)! ? (content.image?.size.width)! / 2 : (content.image?.size.height)! / 2
+        
+        content.imageProperties.cornerRadius = (content.image?.size.height ?? 65) / 2
         
         cell.contentConfiguration = content
+        
         
         return cell
     }
@@ -77,6 +82,12 @@ class MainTableViewController: UITableViewController {
      return true
      }
      */
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
     
     /*
      // MARK: - Navigation
