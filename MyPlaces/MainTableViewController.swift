@@ -18,6 +18,11 @@ class MainTableViewController: UITableViewController {
         
     }
     
+    @IBAction func cancelAction(_ unwindSegue: UIStoryboardSegue) {
+//        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
