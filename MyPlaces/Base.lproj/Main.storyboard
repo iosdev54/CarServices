@@ -60,6 +60,8 @@
                                         <constraint firstItem="VmR-Zo-2C7" firstAttribute="leading" secondItem="8ce-BX-rSW" secondAttribute="leading" constant="15" id="587-Bd-wPZ"/>
                                         <constraint firstAttribute="trailing" secondItem="hRb-25-ogi" secondAttribute="trailing" constant="15" id="B94-BM-HbN"/>
                                         <constraint firstItem="VmR-Zo-2C7" firstAttribute="centerY" secondItem="8ce-BX-rSW" secondAttribute="centerY" id="F3l-Ld-VqN"/>
+                                        <constraint firstItem="VmR-Zo-2C7" firstAttribute="top" secondItem="8ce-BX-rSW" secondAttribute="top" constant="10" id="Le0-SK-egk"/>
+                                        <constraint firstAttribute="bottom" secondItem="VmR-Zo-2C7" secondAttribute="bottom" constant="10" id="TLb-4n-4Ob"/>
                                         <constraint firstAttribute="bottom" secondItem="hRb-25-ogi" secondAttribute="bottom" constant="8" id="W28-GE-XpW"/>
                                         <constraint firstItem="hRb-25-ogi" firstAttribute="leading" secondItem="VmR-Zo-2C7" secondAttribute="trailing" constant="15" id="YXp-sa-7Ni"/>
                                     </constraints>
@@ -237,13 +239,21 @@
                     <navigationItem key="navigationItem" title="New Place" id="0mV-mk-ynA">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JVa-k0-eQE">
                             <connections>
-                                <segue destination="jYZ-G2-ynI" kind="unwind" unwindAction="cancelAction:" id="XfK-1k-aDK"/>
+                                <action selector="cancelAction:" destination="clN-Ft-E8l" id="oos-ze-qZ6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kib-sv-uFz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kib-sv-uFz">
+                            <connections>
+                                <segue destination="jYZ-G2-ynI" kind="unwind" unwindAction="unwindSegue:" id="CNh-Mc-6GX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageOfPlace" destination="Qga-y4-rlx" id="Aey-sb-oWS"/>
+                        <outlet property="placeImage" destination="Qga-y4-rlx" id="Aey-sb-oWS"/>
+                        <outlet property="placeLocation" destination="5Z9-vn-yB7" id="XOf-s8-DgC"/>
+                        <outlet property="placeName" destination="Npe-Wv-14R" id="1yi-Kg-6Bi"/>
+                        <outlet property="placeType" destination="VZ0-uU-rHH" id="qIc-Eh-WLP"/>
+                        <outlet property="saveButton" destination="kib-sv-uFz" id="kvJ-or-vco"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFg-9n-yRd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

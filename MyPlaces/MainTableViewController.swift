@@ -10,7 +10,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
     
     
-    private let places = Place.getPlaces()
+    private var places = Place.getPlaces()
     
     
     override func viewDidLoad() {
@@ -18,9 +18,17 @@ class MainTableViewController: UITableViewController {
         
     }
     
-    @IBAction func cancelAction(_ unwindSegue: UIStoryboardSegue) {
-//        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
+    @IBAction func unwindSegue(_ unwindSegue: UIStoryboardSegue) {
+        
+        guard let newPlaceVC = unwindSegue.source as? NewPlaceViewController else { return }
+        
+        newPlaceVC.saveNewPlace()
+        places.append(newPlaceVC.newPlace!)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
     // MARK: - Table view data source
@@ -34,13 +42,20 @@ class MainTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        cell.nameLabel.text = places[indexPath.row].name
-        cell.locationLabel.text = places[indexPath.row].location
-        cell.typeLabel.text = places[indexPath.row].type
+        let place = places[indexPath.row]
         
-        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
+        cell.nameLabel.text = place.name
+        cell.locationLabel.text = place.location
+        cell.typeLabel.text = place.type
+        
+        if place.image == nil {
+            cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
+       
 
         
         
