@@ -9,6 +9,8 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     
+    @IBOutlet weak var imageOfPlace: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +21,22 @@ class NewPlaceViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+                self.chooseInagePicker(sourse: .camera)
+            }
+            
+            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+                self.chooseInagePicker(sourse: .photoLibrary)
+            }
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            actionSheet.addAction(camera)
+            actionSheet.addAction(photo)
+            actionSheet.addAction(cancel)
+            
+            present(actionSheet, animated: true)
             
         } else {
             //Скрываем клавиатуту по нажатию за пределами клавиатуры и прелелами первой ячейки
@@ -46,3 +64,30 @@ extension NewPlaceViewController: UITextFieldDelegate {
     }
     
 }
+
+//MARK: - Work with image
+
+extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func chooseInagePicker(sourse: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourse) {
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = sourse
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        imageOfPlace.image = info[.editedImage] as? UIImage
+        imageOfPlace.contentMode = .scaleToFill
+        imageOfPlace.clipsToBounds = true
+
+        dismiss(animated: true)
+    }
+    
+}
+ 
