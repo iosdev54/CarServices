@@ -82,7 +82,7 @@
                     <navigationItem key="navigationItem" title="My Places" id="3GR-FV-K26">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Voo-hf-8Nt">
                             <connections>
-                                <segue destination="8Fn-NY-LeR" kind="presentation" id="7id-Xl-gxr"/>
+                                <segue destination="8Fn-NY-LeR" kind="presentation" identifier="NewPlaceVC" id="7id-Xl-gxr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
