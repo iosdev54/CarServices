@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  MainViewController.swift
 //  MyPlaces
 //
 //  Created by Dmytro Grytsenko on 21.11.2022.
@@ -8,13 +8,15 @@
 import UIKit
 import RealmSwift
 
-class MainTableViewController: UITableViewController {
+class MainViewController: UIViewController {
     
     private var places: Results<Place>!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         places = realm.objects(Place.self)
     }
     
@@ -24,17 +26,32 @@ class MainTableViewController: UITableViewController {
         
         newPlaceVC.savePlace()
         tableView.reloadData()
+    }
+   
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "showDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            guard let newPlaceVC = segue.destination as? NewPlaceViewController else { return }
+            let place = places[indexPath.row]
+            newPlaceVC.currentPlace = place
+        }
     }
     
-    // MARK: - Table view data source
+        
+}
+// MARK: - Table view data source, delegate
+
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return places.isEmpty ? 0 : places.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
@@ -52,17 +69,15 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - Table view delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let place = places[indexPath.row]
         
@@ -83,19 +98,6 @@ class MainTableViewController: UITableViewController {
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, addAction])
         return configuration
-    }
-    
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "showDetail" {
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            guard let newPlaceVC = segue.destination as? NewPlaceViewController else { return }
-            let place = places[indexPath.row]
-            newPlaceVC.currentPlace = place
-        }
     }
     
     
