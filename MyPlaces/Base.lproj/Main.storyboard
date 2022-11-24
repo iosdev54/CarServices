@@ -71,6 +71,7 @@
                                     <outlet property="locationLabel" destination="ziK-2m-9Av" id="MWp-ki-gk4"/>
                                     <outlet property="nameLabel" destination="SHd-hZ-aIe" id="wA7-OW-nkx"/>
                                     <outlet property="typeLabel" destination="ZAu-PI-5y8" id="3Tw-3a-cAt"/>
+                                    <segue destination="clN-Ft-E8l" kind="show" identifier="showDetail" id="EhA-Mi-3Yh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -79,7 +80,7 @@
                             <outlet property="delegate" destination="3WD-iT-Z2S" id="SEP-W1-x0c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Places" id="3GR-FV-K26">
+                    <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="3GR-FV-K26">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Voo-hf-8Nt">
                             <connections>
                                 <segue destination="8Fn-NY-LeR" kind="presentation" identifier="NewPlaceVC" id="7id-Xl-gxr"/>
@@ -96,7 +97,7 @@
             <objects>
                 <tableViewController id="clN-Ft-E8l" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="giC-Rk-gYf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -236,7 +237,7 @@
                             <outlet property="delegate" destination="clN-Ft-E8l" id="Q7x-8N-Ps4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Place" id="0mV-mk-ynA">
+                    <navigationItem key="navigationItem" title="New Place" largeTitleDisplayMode="always" id="0mV-mk-ynA">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JVa-k0-eQE">
                             <connections>
                                 <action selector="cancelAction:" destination="clN-Ft-E8l" id="oos-ze-qZ6"/>
@@ -265,8 +266,8 @@
         <scene sceneID="kmt-wT-jN9">
             <objects>
                 <navigationController id="Xpb-Kh-nuc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vRr-kv-fJM">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="vRr-kv-fJM">
+                        <rect key="frame" x="0.0" y="48" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="24"/>
@@ -299,6 +300,9 @@
             <point key="canvasLocation" x="1576.8115942028987" y="801.5625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="EhA-Mi-3Yh"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
         <systemColor name="systemBackgroundColor">

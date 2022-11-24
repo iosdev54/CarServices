@@ -22,7 +22,7 @@ class MainTableViewController: UITableViewController {
         
         guard let newPlaceVC = unwindSegue.source as? NewPlaceViewController else { return }
         
-        newPlaceVC.saveNewPlace()
+        newPlaceVC.savePlace()
         tableView.reloadData()
         
     }
@@ -54,6 +54,10 @@ class MainTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -82,15 +86,17 @@ class MainTableViewController: UITableViewController {
     }
     
     
+    // MARK: - Navigation
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            guard let newPlaceVC = segue.destination as? NewPlaceViewController else { return }
+            let place = places[indexPath.row]
+            newPlaceVC.currentPlace = place
+        }
+    }
+    
     
 }
