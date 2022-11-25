@@ -10,6 +10,7 @@
 		180553EB292D2C9D00739ECB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 180553EA292D2C9D00739ECB /* Realm */; };
 		180553ED292D2C9D00739ECB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 180553EC292D2C9D00739ECB /* RealmSwift */; };
 		18A60496292CE8C40013CEDF /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A60495292CE8C40013CEDF /* NewPlaceViewController.swift */; };
+		18A7D6392930F36800014F49 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7D6382930F36800014F49 /* RatingControl.swift */; };
 		18B72DE0292D358A00296BF0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B72DDF292D358A00296BF0 /* StorageManager.swift */; };
 		18C9B6B9292AA2A50071B070 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6B8292AA2A50071B070 /* AppDelegate.swift */; };
 		18C9B6BB292AA2A50071B070 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6BA292AA2A50071B070 /* SceneDelegate.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		18A60495292CE8C40013CEDF /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
+		18A7D6382930F36800014F49 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		18B72DDF292D358A00296BF0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		18C9B6B5292AA2A50071B070 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C9B6B8292AA2A50071B070 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				18A60495292CE8C40013CEDF /* NewPlaceViewController.swift */,
 				18C9B6D2292BF0580071B070 /* PlaceModel.swift */,
 				18B72DDF292D358A00296BF0 /* StorageManager.swift */,
+				18A7D6382930F36800014F49 /* RatingControl.swift */,
 				18C9B6BE292AA2A50071B070 /* Main.storyboard */,
 				18C9B6C1292AA2A70071B070 /* Assets.xcassets */,
 				18C9B6C3292AA2A70071B070 /* LaunchScreen.storyboard */,
@@ -169,6 +172,7 @@
 				18A60496292CE8C40013CEDF /* NewPlaceViewController.swift in Sources */,
 				18C9B6B9292AA2A50071B070 /* AppDelegate.swift in Sources */,
 				18B72DE0292D358A00296BF0 /* StorageManager.swift in Sources */,
+				18A7D6392930F36800014F49 /* RatingControl.swift in Sources */,
 				18C9B6D3292BF0580071B070 /* PlaceModel.swift in Sources */,
 				18C9B6D1292BDCB40071B070 /* CustomTableViewCell.swift in Sources */,
 				18C9B6BB292AA2A50071B070 /* SceneDelegate.swift in Sources */,

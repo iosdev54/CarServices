@@ -28,6 +28,12 @@ class NewPlaceViewController: UITableViewController {
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
         setupEditScreen()
+        
+        //Убираем границу под рейтингом
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: CGFloat.leastNormalMagnitude))
+
+        //Убираем отстпуп над секцией
+        tableView.sectionHeaderTopPadding = CGFloat.leastNormalMagnitude
     }
     
     //MARK: - Table view delegate
@@ -66,13 +72,13 @@ class NewPlaceViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return .leastNormalMagnitude
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return .leastNormalMagnitude
     }
-    
+        
     func savePlace() {
         
         var image: UIImage?
