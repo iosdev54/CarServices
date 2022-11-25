@@ -11,8 +11,11 @@ import RealmSwift
 class MainViewController: UIViewController {
     
     private var places: Results<Place>!
+    private var ascendingSorting = true
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var reversedSortingButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,28 @@ class MainViewController: UIViewController {
         newPlaceVC.savePlace()
         tableView.reloadData()
     }
-   
+    
+    @IBAction func sortSelection(_ sender: UISegmentedControl) {
+        
+        sorting()
+    }
+    
+    @IBAction func reversedSorting(_ sender: UIBarButtonItem) {
+        
+        ascendingSorting.toggle()
+        
+        reversedSortingButton.image = ascendingSorting ? UIImage(named: "AZ") : UIImage(named: "ZA")
+        
+        sorting()
+    }
+    
+    private func sorting() {
+        
+        places = segmentedControl.selectedSegmentIndex == 0 ? places.sorted(byKeyPath: "date", ascending: ascendingSorting) : places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        
+        tableView.reloadData()
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,7 +86,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         cell.typeLabel.text = place.type
         
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
-        
+        cell.contentMode = .scaleAspectFill
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
         
@@ -71,6 +95,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

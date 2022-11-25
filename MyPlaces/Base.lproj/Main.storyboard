@@ -23,6 +23,9 @@
                                     <segment title="Date"/>
                                     <segment title="Name"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortSelection:" destination="A53-7f-5g8" eventType="valueChanged" id="bBa-9s-VIF"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wff-S9-r8m">
                                 <rect key="frame" x="0.0" y="124" width="414" height="772"/>
@@ -105,7 +108,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="eJu-D7-Uk8">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="H1O-h6-hb7"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="H1O-h6-hb7">
+                            <connections>
+                                <action selector="reversedSorting:" destination="A53-7f-5g8" id="Fth-6w-QB8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="L2d-DL-boz">
                             <connections>
                                 <segue destination="8Fn-NY-LeR" kind="presentation" identifier="NewPlaceVC" id="kph-Og-xXd"/>
@@ -113,6 +120,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="reversedSortingButton" destination="H1O-h6-hb7" id="jdn-PP-SNq"/>
+                        <outlet property="segmentedControl" destination="75l-34-dhC" id="7JL-HF-pD4"/>
                         <outlet property="tableView" destination="wff-S9-r8m" id="EaX-aA-sWW"/>
                     </connections>
                 </viewController>
@@ -124,8 +133,8 @@
         <scene sceneID="RR4-rI-wzK">
             <objects>
                 <tableViewController id="clN-Ft-E8l" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="giC-Rk-gYf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="giC-Rk-gYf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -329,7 +338,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fi3-Zu-24R"/>
+        <segue reference="Y3u-Eq-tkn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
