@@ -46,13 +46,13 @@ class NewPlaceViewController: UITableViewController {
         if indexPath.row == 0 {
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-                self.chooseInagePicker(sourse: .camera)
+                self.chooseImagePicker(sourse: .camera)
             }
             camera.setValue(cameraIcon, forKey: "image")
             camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
             
             let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-                self.chooseInagePicker(sourse: .photoLibrary)
+                self.chooseImagePicker(sourse: .photoLibrary)
             }
             photo.setValue(photoIcon, forKey: "image")
             photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
@@ -103,7 +103,6 @@ class NewPlaceViewController: UITableViewController {
         } else {
             StorageManager.saveObject(newPlace)
         }
-        
     }
     
     private func setupEditScreen() {
@@ -131,7 +130,6 @@ class NewPlaceViewController: UITableViewController {
         if let topItem = navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
-        
         navigationItem.leftBarButtonItem = nil
         title = currentPlace?.name
         saveButton.isEnabled = true
@@ -164,7 +162,7 @@ extension NewPlaceViewController: UITextFieldDelegate {
 
 extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func chooseInagePicker(sourse: UIImagePickerController.SourceType) {
+    func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourse) {
             
             let imagePicker = UIImagePickerController()

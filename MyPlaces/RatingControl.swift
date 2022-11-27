@@ -28,7 +28,6 @@ import UIKit
         }
     }
     
-    
     //MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,7 +54,6 @@ import UIKit
         }
     }
     
-    
     private func setupButtons() {
         
         for button in ratingButtons {
@@ -70,7 +68,6 @@ import UIKit
         let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
         let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
         
-        
         for _ in 0 ..< starCount {
             let button = UIButton()
             
@@ -80,7 +77,6 @@ import UIKit
             button.setImage(highlightedStar, for: .highlighted)
             button.setImage(highlightedStar, for: [.highlighted, .selected])
             
-            
             //Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false
             button.heightAnchor.constraint(equalToConstant: starSize.height) .isActive = true
@@ -88,8 +84,8 @@ import UIKit
             
             //Setup the button action
             button.addTarget(self, action: #selector(ratingButtonTapped), for: .touchUpInside)
+        
             addArrangedSubview(button)
-            
             ratingButtons.append(button)
         }
         updateButtonSelectionState()

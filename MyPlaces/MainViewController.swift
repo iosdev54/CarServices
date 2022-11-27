@@ -37,6 +37,8 @@ class MainViewController: UIViewController {
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        searchController.searchBar.delegate = self
     }
     
     @IBAction func unwindSegue(_ unwindSegue: UIStoryboardSegue) {
@@ -102,6 +104,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
+        cell.cellRating.rating = Int(place.rating)
         
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
         cell.contentMode = .scaleAspectFill
@@ -150,7 +153,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 //MARK: - UISearchController
-extension MainViewController: UISearchResultsUpdating {
+extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
    
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -159,10 +162,26 @@ extension MainViewController: UISearchResultsUpdating {
     
     private func filterContentForSearchTaxt(_ searchText: String) {
         
-        filteredPlaces = places.filter("name CONTAINS[cd] %@ OR location CONTAINS[cd] %@", searchText, searchText)
-        
+    switch searchController.searchBar.selectedScopeButtonIndex {
+    case 0: filteredPlaces = places.filter("name CONTAINS[cd] %@", searchText)
+    case 1: filteredPlaces = places.filter("location CONTAINS[cd] %@", searchText)
+    case 2: filteredPlaces = places.filter("type CONTAINS[cd] %@", searchText)
+    default: filteredPlaces = places.filter("name CONTAINS[cd] %@", searchText)
+    }
         tableView.reloadData()
+        
+        //Фильтрация поиска без использования ScopeBar
+//        filteredPlaces = places.filter("name CONTAINS[cd] %@ OR location CONTAINS[cd] %@", searchText, searchText)
+//        tableView.reloadData()
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsScopeBar = true
+        searchBar.scopeButtonTitles = ["name", "location", "type"]
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsScopeBar = false
+    }
     
 }
