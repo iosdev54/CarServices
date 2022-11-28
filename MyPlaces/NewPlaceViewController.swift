@@ -79,7 +79,7 @@ class NewPlaceViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNormalMagnitude
     }
-        
+    
     func savePlace() {
         
         var image: UIImage?
@@ -139,6 +139,16 @@ class NewPlaceViewController: UITableViewController {
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
+    }
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier != "showMap" {
+            return
+        }
+        let mapVC = segue.destination as! MapViewController
+        mapVC.place = currentPlace
     }
     
 }
