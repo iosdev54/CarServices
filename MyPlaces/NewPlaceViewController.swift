@@ -31,7 +31,6 @@ class NewPlaceViewController: UITableViewController {
         
         //Убираем границу под рейтингом
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: CGFloat.leastNormalMagnitude))
-
         //Убираем отстпуп над секцией
         tableView.sectionHeaderTopPadding = CGFloat.leastNormalMagnitude
     }
@@ -45,13 +44,15 @@ class NewPlaceViewController: UITableViewController {
         
         if indexPath.row == 0 {
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+            let camera = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+                guard let `self` = self else { return }
                 self.chooseImagePicker(sourse: .camera)
             }
             camera.setValue(cameraIcon, forKey: "image")
             camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
             
-            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            let photo = UIAlertAction(title: "Photo", style: .default) { [weak self] _ in
+                guard let `self` = self else { return }
                 self.chooseImagePicker(sourse: .photoLibrary)
             }
             photo.setValue(photoIcon, forKey: "image")

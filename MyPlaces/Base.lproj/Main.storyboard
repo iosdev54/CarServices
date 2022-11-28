@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="75l-34-dhC">
-                                <rect key="frame" x="0.0" y="92" width="414" height="32"/>
+                                <rect key="frame" x="15" y="92" width="384" height="32"/>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -111,13 +111,13 @@
                         <viewLayoutGuide key="safeArea" id="evI-Oz-wH5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="75l-34-dhC" firstAttribute="trailing" secondItem="evI-Oz-wH5" secondAttribute="trailing" id="2j0-Zj-xhm"/>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="trailing" secondItem="evI-Oz-wH5" secondAttribute="trailing" id="6gh-u0-kTg"/>
-                            <constraint firstItem="75l-34-dhC" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" id="M1m-LN-jig"/>
+                            <constraint firstItem="75l-34-dhC" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" constant="15" id="M1m-LN-jig"/>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" id="TSe-Og-3yS"/>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="top" secondItem="75l-34-dhC" secondAttribute="bottom" constant="1" id="Xhf-M1-12p"/>
                             <constraint firstItem="75l-34-dhC" firstAttribute="top" secondItem="evI-Oz-wH5" secondAttribute="top" id="gcf-wz-eZf"/>
                             <constraint firstAttribute="bottom" secondItem="wff-S9-r8m" secondAttribute="bottom" id="knr-20-t5h"/>
+                            <constraint firstItem="evI-Oz-wH5" firstAttribute="trailing" secondItem="75l-34-dhC" secondAttribute="trailing" constant="15" id="zeQ-pS-m1Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="eJu-D7-Uk8">

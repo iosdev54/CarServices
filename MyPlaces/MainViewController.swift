@@ -92,7 +92,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         if isFiltering {
             return filteredPlaces.count
         }
-        return places.isEmpty ? 0 : places.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,8 +108,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
         cell.contentMode = .scaleAspectFill
-        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
-        cell.imageOfPlace.clipsToBounds = true
         
         return cell
     }
@@ -138,7 +136,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         deleteAction.image = UIImage(systemName: "trash")
         deleteAction.backgroundColor = .systemRed
         
-        let addAction = UIContextualAction(style: .normal, title: nil) { _, _, completionHandler in
+        let addAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completionHandler in
+            guard let `self` = self else { return }
             self.performSegue(withIdentifier: "NewPlaceVC", sender: self)
             completionHandler(true)
         }
@@ -170,14 +169,16 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     }
         tableView.reloadData()
         
+        /*
         //Фильтрация поиска без использования ScopeBar
-//        filteredPlaces = places.filter("name CONTAINS[cd] %@ OR location CONTAINS[cd] %@", searchText, searchText)
-//        tableView.reloadData()
+        filteredPlaces = places.filter("name CONTAINS[cd] %@ OR location CONTAINS[cd] %@", searchText, searchText)
+        tableView.reloadData()
+        */
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsScopeBar = true
-        searchBar.scopeButtonTitles = ["name", "location", "type"]
+        searchBar.scopeButtonTitles = ["Name", "Location", "Type"]
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
