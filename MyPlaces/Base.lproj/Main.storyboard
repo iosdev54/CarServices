@@ -403,7 +403,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a6Q-xm-Y1h">
-                                <rect key="frame" x="15" y="168" width="384" height="36"/>
+                                <rect key="frame" x="15" y="138" width="384" height="36"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -418,32 +418,67 @@
                                     <action selector="doneButtonPressed" destination="wYl-mc-WpN" eventType="touchUpInside" id="Vhp-dY-LUS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kle-Ml-Fvg">
+                                <rect key="frame" x="182" y="812" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="11K-vn-7nw"/>
+                                    <constraint firstAttribute="height" constant="50" id="EaS-qV-2Yx"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="GetDirection"/>
+                                <connections>
+                                    <action selector="goButtonPressed" destination="wYl-mc-WpN" eventType="touchUpInside" id="lE0-eE-cJU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvt-wk-R2b">
+                                <rect key="frame" x="15" y="174" width="384" height="36"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Interval" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3YS-Pd-She">
+                                <rect key="frame" x="15" y="210" width="384" height="36"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cS6-9B-Ob1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="U5a-1r-sui" secondAttribute="trailing" constant="40" id="1n1-JY-byg"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="Cvt-wk-R2b" secondAttribute="trailing" constant="15" id="2o0-ka-tcb"/>
+                            <constraint firstItem="kle-Ml-Fvg" firstAttribute="centerX" secondItem="gJt-W8-9lU" secondAttribute="centerX" id="35E-jU-ffu"/>
                             <constraint firstItem="a6Q-xm-Y1h" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" constant="15" id="3JR-GE-V8d"/>
                             <constraint firstItem="rrn-3c-hRg" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="40" id="Cv9-6A-COC"/>
                             <constraint firstItem="g1C-GF-mOF" firstAttribute="centerY" secondItem="gJt-W8-9lU" secondAttribute="centerY" constant="-20" id="Ecn-xB-D9y"/>
+                            <constraint firstItem="Cvt-wk-R2b" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="126" id="GtN-2o-Sg5"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="trailing" secondItem="cS6-9B-Ob1" secondAttribute="trailing" id="OfA-4y-nG1"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" id="QDX-ai-z4R"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="rrn-3c-hRg" secondAttribute="trailing" constant="40" id="RuP-57-WVR"/>
+                            <constraint firstItem="3YS-Pd-She" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" constant="15" id="SqX-8U-Qf3"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="top" secondItem="gJt-W8-9lU" secondAttribute="top" id="UJZ-hQ-z2N"/>
                             <constraint firstItem="g1C-GF-mOF" firstAttribute="centerX" secondItem="gJt-W8-9lU" secondAttribute="centerX" id="W39-PG-j8T"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="U5a-1r-sui" secondAttribute="bottom" constant="80" id="Xjq-KA-QAz"/>
                             <constraint firstItem="89p-bx-ddy" firstAttribute="centerX" secondItem="gJt-W8-9lU" secondAttribute="centerX" id="Zem-VZ-xDm"/>
-                            <constraint firstItem="a6Q-xm-Y1h" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="120" id="a3o-rP-N1g"/>
+                            <constraint firstItem="a6Q-xm-Y1h" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="90" id="a3o-rP-N1g"/>
+                            <constraint firstItem="3YS-Pd-She" firstAttribute="top" secondItem="Cvt-wk-R2b" secondAttribute="bottom" id="dk3-Fi-T8M"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="kle-Ml-Fvg" secondAttribute="bottom" id="e3g-es-JUJ"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="a6Q-xm-Y1h" secondAttribute="trailing" constant="15" id="lI6-aR-VDF"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="3YS-Pd-She" secondAttribute="trailing" constant="15" id="n03-Zl-6Q5"/>
+                            <constraint firstItem="Cvt-wk-R2b" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" constant="15" id="nJg-iH-emG"/>
                             <constraint firstAttribute="bottom" secondItem="Iau-Ew-7NR" secondAttribute="bottom" id="y3C-98-ArR"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="89p-bx-ddy" secondAttribute="bottom" id="yhf-6t-loi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="a6Q-xm-Y1h" id="67L-hp-xUz"/>
+                        <outlet property="distanceLabel" destination="Cvt-wk-R2b" id="MHP-Hc-bFT"/>
                         <outlet property="doneButton" destination="89p-bx-ddy" id="0ah-Ro-wTw"/>
+                        <outlet property="goButton" destination="kle-Ml-Fvg" id="HF5-GY-Nzp"/>
                         <outlet property="mapPinImage" destination="g1C-GF-mOF" id="OcO-1T-W4j"/>
                         <outlet property="mapView" destination="Iau-Ew-7NR" id="R0b-QW-dtB"/>
+                        <outlet property="timeIntervalLabel" destination="3YS-Pd-She" id="UTD-9O-dbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wz6-8D-tRg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -503,6 +538,7 @@
     <resources>
         <image name=" Pin" width="42" height="42"/>
         <image name="AZ" width="25" height="24"/>
+        <image name="GetDirection" width="50" height="50"/>
         <image name="Location" width="128" height="128"/>
         <image name="Photo" width="195" height="196"/>
         <image name="Placeholder" width="22" height="22"/>

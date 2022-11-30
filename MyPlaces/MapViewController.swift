@@ -21,16 +21,22 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     let regionInMetters = 10_000.00
     var incomeSegueIdentifier = ""
+    var placeCoordinate: CLLocationCoordinate2D?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeIntervalLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addressLabel.text = ""
+        distanceLabel.text = ""
+        timeIntervalLabel.text = ""
         setupMapView()
         mapView.delegate = self
         checkLocationServises()
@@ -46,17 +52,28 @@ class MapViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func goButtonPressed() {
+        getDirections()
+    }
+    
     @IBAction func closeVC() {
         dismiss(animated: true)
     }
     
     private func setupMapView() {
         
+        goButton.isHidden = true
+        distanceLabel.isHidden = true
+        timeIntervalLabel.isHidden = true
+        
         if incomeSegueIdentifier == "showPlace" {
             setupPlaceMark()
             mapPinImage.isHidden = true
             addressLabel.isHidden = true
             doneButton.isHidden = true
+            goButton.isHidden = false
+            distanceLabel.isHidden = false
+            timeIntervalLabel.isHidden = false
         }
     }
     
@@ -82,6 +99,7 @@ class MapViewController: UIViewController {
             
             guard let placemarkLocation = placemark?.location else { return }
             annotation.coordinate = placemarkLocation.coordinate
+            self.placeCoordinate = placemarkLocation.coordinate
             
             self.mapView.showAnnotations([annotation], animated: true)
             //Выделяем, слегка увеличиваем аннотацию
@@ -93,7 +111,6 @@ class MapViewController: UIViewController {
         
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
-            //            checkLocationAuthorization()
         } else {
             //Алерт отображается если геолокация отключена глобально для всего устройства
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -108,34 +125,72 @@ class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    /*  //Deprecated
-     private func checkLocationAuthorization() {
-     switch CLLocationManager.authorizationStatus() {
-     case .authorizedWhenInUse:
-     mapView.showsUserLocation = true
-     break
-     case .denied:
-     //Show alert controller
-     break
-     case .notDetermined:
-     locationManager.requestWhenInUseAuthorization()
-     case .restricted:
-     //Show alert controller
-     break
-     case .authorizedAlways:
-     break
-     @unknown default:
-     print("New case is available")
-     }
-     }
-     */
-    
     private func showUserLocation() {
         
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetters, longitudinalMeters: regionInMetters)
             mapView.setRegion(region, animated: true)
         }
+    }
+    
+    private func getDirections() {
+        
+        guard let location = locationManager.location?.coordinate else {
+            showAlert(title: "Error", message: "Current location is not found.")
+            return }
+        
+        guard let request = createDirectionRequest(from: location) else {
+            showAlert(title: "Error", message: "Destination is not found.")
+            return
+        }
+        let directions = MKDirections(request: request)
+        directions.calculate { [weak self] responce, error in
+            guard let `self` = self else { return }
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let responce = responce else {
+                self.showAlert(title: "Error", message: "The route is not available.")
+                return }
+            //For each route
+            /*
+             for route in responce.routes  {
+             self.mapView.addOverlay(route.polyline)
+             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+             
+             let distance = String(format: "%.1f", route.distance / 1000)
+             let timeInterval = ceilf(Float(route.expectedTravelTime / 60))
+             self.distanceLabel.text = "Растояние до места - \(distance) км."
+             self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин."
+             }
+             */
+            //For first route
+            if let route = responce.routes.first {
+                self.mapView.addOverlay(route.polyline)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                
+                let distance = String(format: "%.1f", route.distance / 1000)
+                let timeInterval = ceilf(Float(route.expectedTravelTime / 60))
+                self.distanceLabel.text = "Растояние до места - \(distance) км."
+                self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин."
+            }
+        }
+    }
+    
+    private func createDirectionRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+        
+        guard let destinationCoordinate = placeCoordinate else { return nil }
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        
+        return request
     }
     
     private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
@@ -193,7 +248,7 @@ extension MapViewController: MKMapViewDelegate {
             let cityName = placemark?.locality
             let streetName = placemark?.thoroughfare
             let buildNumber = placemark?.subThoroughfare
-
+            
             DispatchQueue.main.async {
                 if cityName != nil, streetName != nil, buildNumber != nil {
                     self.addressLabel.text = "\(cityName!), \(streetName!), \(buildNumber!)"
@@ -205,12 +260,20 @@ extension MapViewController: MKMapViewDelegate {
             }
         }
     }
+    
+    //    Для отображения маршрута на карте
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = .systemBlue
+        
+        return renderer
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        //        checkLocationAuthorization()
         
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
