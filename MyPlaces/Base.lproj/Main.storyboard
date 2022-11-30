@@ -259,7 +259,7 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="Placeholder"/>
                                                     <connections>
-                                                        <segue destination="wYl-mc-WpN" kind="presentation" identifier="getAdress" modalPresentationStyle="fullScreen" id="tTh-1J-AuW"/>
+                                                        <segue destination="wYl-mc-WpN" kind="presentation" identifier="getAddress" modalPresentationStyle="fullScreen" id="tTh-1J-AuW"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -402,7 +402,7 @@
                                     <constraint firstAttribute="height" constant="40" id="wj1-Es-Y6b"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Adress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a6Q-xm-Y1h">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a6Q-xm-Y1h">
                                 <rect key="frame" x="15" y="168" width="384" height="36"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -440,7 +440,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="adressLabel" destination="a6Q-xm-Y1h" id="67L-hp-xUz"/>
+                        <outlet property="addressLabel" destination="a6Q-xm-Y1h" id="67L-hp-xUz"/>
                         <outlet property="doneButton" destination="89p-bx-ddy" id="0ah-Ro-wTw"/>
                         <outlet property="mapPinImage" destination="g1C-GF-mOF" id="OcO-1T-W4j"/>
                         <outlet property="mapView" destination="Iau-Ew-7NR" id="R0b-QW-dtB"/>

@@ -9,8 +9,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol MapViewControllerDelegate {
+    func getAddress(_ address: String? )
+}
+
 class MapViewController: UIViewController {
     
+    var mapViewControllerDelegate: MapViewControllerDelegate?
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
@@ -19,13 +24,13 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
-    @IBOutlet weak var adressLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adressLabel.text = ""
+        addressLabel.text = ""
         setupMapView()
         mapView.delegate = self
         checkLocationServises()
@@ -37,7 +42,8 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        
+        mapViewControllerDelegate?.getAddress(addressLabel.text)
+        dismiss(animated: true)
     }
     
     @IBAction func closeVC() {
@@ -49,7 +55,7 @@ class MapViewController: UIViewController {
         if incomeSegueIdentifier == "showPlace" {
             setupPlaceMark()
             mapPinImage.isHidden = true
-            adressLabel.isHidden = true
+            addressLabel.isHidden = true
             doneButton.isHidden = true
         }
     }
@@ -184,16 +190,17 @@ extension MapViewController: MKMapViewDelegate {
             }
             guard let placemarks = placemarks else { return }
             let placemark = placemarks.first
+            let cityName = placemark?.locality
             let streetName = placemark?.thoroughfare
             let buildNumber = placemark?.subThoroughfare
-            
+
             DispatchQueue.main.async {
-                if streetName != nil, buildNumber != nil {
-                    self.adressLabel.text = "\(streetName!), \(buildNumber!)"
-                } else if streetName != nil {
-                    self.adressLabel.text = "\(streetName!)"
+                if cityName != nil, streetName != nil, buildNumber != nil {
+                    self.addressLabel.text = "\(cityName!), \(streetName!), \(buildNumber!)"
+                } else if cityName != nil, streetName != nil {
+                    self.addressLabel.text = "\(cityName!), \(streetName!)"
                 } else {
-                    self.adressLabel.text = ""
+                    self.addressLabel.text = ""
                 }
             }
         }
@@ -208,7 +215,7 @@ extension MapViewController: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
-            if incomeSegueIdentifier == "getAdress" {
+            if incomeSegueIdentifier == "getAddress" {
                 showUserLocation()
             }
             break
