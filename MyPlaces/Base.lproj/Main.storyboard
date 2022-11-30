@@ -175,7 +175,7 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="map"/>
                                                     <connections>
-                                                        <segue destination="wYl-mc-WpN" kind="presentation" identifier="showMap" id="VsF-OL-s7b"/>
+                                                        <segue destination="wYl-mc-WpN" kind="presentation" identifier="showMap" modalPresentationStyle="fullScreen" id="VsF-OL-s7b"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -350,11 +350,11 @@
             <objects>
                 <viewController id="wYl-mc-WpN" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gJt-W8-9lU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iau-Ew-7NR">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrn-3c-hRg">
@@ -369,15 +369,29 @@
                                     <action selector="closeVC" destination="wYl-mc-WpN" eventType="touchUpInside" id="bqP-yY-Exw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5a-1r-sui">
+                                <rect key="frame" x="324" y="772" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="HQf-Sh-Ipb"/>
+                                    <constraint firstAttribute="height" constant="50" id="JDN-ok-XcK"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Location"/>
+                                <connections>
+                                    <action selector="centerViewInUserLocation" destination="wYl-mc-WpN" eventType="touchUpInside" id="iPT-of-jZl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cS6-9B-Ob1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="U5a-1r-sui" secondAttribute="trailing" constant="40" id="1n1-JY-byg"/>
+                            <constraint firstItem="rrn-3c-hRg" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="40" id="Cv9-6A-COC"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="trailing" secondItem="cS6-9B-Ob1" secondAttribute="trailing" id="OfA-4y-nG1"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" id="QDX-ai-z4R"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="rrn-3c-hRg" secondAttribute="trailing" constant="40" id="RuP-57-WVR"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="top" secondItem="gJt-W8-9lU" secondAttribute="top" id="UJZ-hQ-z2N"/>
-                            <constraint firstItem="rrn-3c-hRg" firstAttribute="top" secondItem="gJt-W8-9lU" secondAttribute="topMargin" constant="40" id="oif-U0-3U4"/>
-                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="rrn-3c-hRg" secondAttribute="trailing" constant="40" id="utM-B2-vk9"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="U5a-1r-sui" secondAttribute="bottom" constant="40" id="Xjq-KA-QAz"/>
                             <constraint firstAttribute="bottom" secondItem="Iau-Ew-7NR" secondAttribute="bottom" id="y3C-98-ArR"/>
                         </constraints>
                     </view>
@@ -440,6 +454,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
+        <image name="Location" width="128" height="128"/>
         <image name="Photo" width="195" height="196"/>
         <image name="camcel" width="128" height="128"/>
         <image name="map" width="50" height="50"/>
