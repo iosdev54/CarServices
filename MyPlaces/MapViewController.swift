@@ -15,30 +15,43 @@ class MapViewController: UIViewController {
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
     let regionInMetters = 10_000.00
+    var incomeSegueIdentifier = ""
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapPinImage: UIImageView!
+    @IBOutlet weak var adressLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupPlaceMark()
-        
+        adressLabel.text = ""
+        setupMapView()
         mapView.delegate = self
-        
         checkLocationServises()
     }
     
     @IBAction func centerViewInUserLocation() {
         
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetters, longitudinalMeters: regionInMetters)
-            
-            mapView.setRegion(region, animated: true )
-        }
+        showUserLocation()
+    }
+    
+    @IBAction func doneButtonPressed() {
+        
     }
     
     @IBAction func closeVC() {
         dismiss(animated: true)
+    }
+    
+    private func setupMapView() {
+        
+        if incomeSegueIdentifier == "showPlace" {
+            setupPlaceMark()
+            mapPinImage.isHidden = true
+            adressLabel.isHidden = true
+            doneButton.isHidden = true
+        }
     }
     
     private func setupPlaceMark() {
@@ -111,6 +124,22 @@ class MapViewController: UIViewController {
      }
      */
     
+    private func showUserLocation() {
+        
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetters, longitudinalMeters: regionInMetters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        
+        let latitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.longitude
+        
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel)
@@ -141,6 +170,34 @@ extension MapViewController: MKMapViewDelegate {
         }
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        let center = getCenterLocation(for: mapView)
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(center) { [weak self] placemarks, error in
+            guard let `self` = self else { return }
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildNumber = placemark?.subThoroughfare
+            
+            DispatchQueue.main.async {
+                if streetName != nil, buildNumber != nil {
+                    self.adressLabel.text = "\(streetName!), \(buildNumber!)"
+                } else if streetName != nil {
+                    self.adressLabel.text = "\(streetName!)"
+                } else {
+                    self.adressLabel.text = ""
+                }
+            }
+        }
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -151,6 +208,9 @@ extension MapViewController: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
+            if incomeSegueIdentifier == "getAdress" {
+                showUserLocation()
+            }
             break
         case .denied:
             showAlert(title: "Your Location is not Available", message: "To give permission Go to: Settings -> MyPlaces -> Location")
