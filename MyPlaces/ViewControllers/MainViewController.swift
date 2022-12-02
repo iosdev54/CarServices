@@ -39,6 +39,9 @@ class MainViewController: UIViewController {
         definesPresentationContext = true
         
         searchController.searchBar.delegate = self
+        searchController.searchBar.searchTextField.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Regular", size: 18) as Any], for: .normal)
+
     }
     
     @IBAction func unwindSegue(_ unwindSegue: UIStoryboardSegue) {
@@ -136,6 +139,12 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         deleteAction.image = UIImage(systemName: "trash")
         deleteAction.backgroundColor = .systemRed
         
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let addAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completionHandler in
             guard let `self` = self else { return }
             self.performSegue(withIdentifier: "NewPlaceVC", sender: self)
@@ -144,7 +153,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         addAction.image = UIImage(systemName: "plus.square")
         addAction.backgroundColor = .systemBlue
         
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, addAction])
+        let configuration = UISwipeActionsConfiguration(actions: [addAction])
         return configuration
     }
     

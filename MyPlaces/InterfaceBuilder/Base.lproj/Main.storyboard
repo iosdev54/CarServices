@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="75l-34-dhC">
-                                <rect key="frame" x="15" y="92" width="384" height="32"/>
+                                <rect key="frame" x="20" y="92" width="374" height="32"/>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -59,7 +59,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="38.5" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ODq-Ob-FlK" customClass="CellRating" customModule="MyPlaces" customModuleProvider="target">
-                                                                    <rect key="frame" x="104" y="0.0" width="200" height="32"/>
+                                                                    <rect key="frame" x="235" y="9.5" width="69" height="13"/>
                                                                 </stackView>
                                                             </subviews>
                                                         </stackView>
@@ -113,12 +113,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="trailing" secondItem="evI-Oz-wH5" secondAttribute="trailing" id="6gh-u0-kTg"/>
-                            <constraint firstItem="75l-34-dhC" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" constant="15" id="M1m-LN-jig"/>
+                            <constraint firstItem="75l-34-dhC" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" constant="20" id="M1m-LN-jig"/>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="leading" secondItem="evI-Oz-wH5" secondAttribute="leading" id="TSe-Og-3yS"/>
                             <constraint firstItem="wff-S9-r8m" firstAttribute="top" secondItem="75l-34-dhC" secondAttribute="bottom" constant="1" id="Xhf-M1-12p"/>
                             <constraint firstItem="75l-34-dhC" firstAttribute="top" secondItem="evI-Oz-wH5" secondAttribute="top" id="gcf-wz-eZf"/>
                             <constraint firstAttribute="bottom" secondItem="wff-S9-r8m" secondAttribute="bottom" id="knr-20-t5h"/>
-                            <constraint firstItem="evI-Oz-wH5" firstAttribute="trailing" secondItem="75l-34-dhC" secondAttribute="trailing" constant="15" id="zeQ-pS-m1Y"/>
+                            <constraint firstItem="evI-Oz-wH5" firstAttribute="trailing" secondItem="75l-34-dhC" secondAttribute="trailing" constant="20" id="zeQ-pS-m1Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="eJu-D7-Uk8">
@@ -147,8 +147,8 @@
         <scene sceneID="RR4-rI-wzK">
             <objects>
                 <tableViewController id="clN-Ft-E8l" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="giC-Rk-gYf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="giC-Rk-gYf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -362,7 +362,7 @@
         <!--Map View Controller-->
         <scene sceneID="kJh-it-cWn">
             <objects>
-                <viewController id="wYl-mc-WpN" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapVC" id="wYl-mc-WpN" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gJt-W8-9lU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,7 +384,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5a-1r-sui">
-                                <rect key="frame" x="344" y="752" width="30" height="30"/>
+                                <rect key="frame" x="344" y="732" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="HQf-Sh-Ipb"/>
                                     <constraint firstAttribute="height" constant="30" id="JDN-ok-XcK"/>
@@ -409,7 +409,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89p-bx-ddy">
-                                <rect key="frame" x="174.5" y="827" width="65" height="35"/>
+                                <rect key="frame" x="174.5" y="807" width="65" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done">
                                     <color key="baseBackgroundColor" systemColor="labelColor"/>
@@ -419,7 +419,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kle-Ml-Fvg">
-                                <rect key="frame" x="182" y="812" width="50" height="50"/>
+                                <rect key="frame" x="182" y="792" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="11K-vn-7nw"/>
                                     <constraint firstAttribute="height" constant="50" id="EaS-qV-2Yx"/>
@@ -459,16 +459,16 @@
                             <constraint firstItem="3YS-Pd-She" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" constant="15" id="SqX-8U-Qf3"/>
                             <constraint firstItem="Iau-Ew-7NR" firstAttribute="top" secondItem="gJt-W8-9lU" secondAttribute="top" id="UJZ-hQ-z2N"/>
                             <constraint firstItem="g1C-GF-mOF" firstAttribute="centerX" secondItem="gJt-W8-9lU" secondAttribute="centerX" id="W39-PG-j8T"/>
-                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="U5a-1r-sui" secondAttribute="bottom" constant="80" id="Xjq-KA-QAz"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="U5a-1r-sui" secondAttribute="bottom" constant="100" id="Xjq-KA-QAz"/>
                             <constraint firstItem="89p-bx-ddy" firstAttribute="centerX" secondItem="gJt-W8-9lU" secondAttribute="centerX" id="Zem-VZ-xDm"/>
                             <constraint firstItem="a6Q-xm-Y1h" firstAttribute="top" secondItem="cS6-9B-Ob1" secondAttribute="top" constant="90" id="a3o-rP-N1g"/>
                             <constraint firstItem="3YS-Pd-She" firstAttribute="top" secondItem="Cvt-wk-R2b" secondAttribute="bottom" id="dk3-Fi-T8M"/>
-                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="kle-Ml-Fvg" secondAttribute="bottom" id="e3g-es-JUJ"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="kle-Ml-Fvg" secondAttribute="bottom" constant="20" id="e3g-es-JUJ"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="a6Q-xm-Y1h" secondAttribute="trailing" constant="15" id="lI6-aR-VDF"/>
                             <constraint firstItem="cS6-9B-Ob1" firstAttribute="trailing" secondItem="3YS-Pd-She" secondAttribute="trailing" constant="15" id="n03-Zl-6Q5"/>
                             <constraint firstItem="Cvt-wk-R2b" firstAttribute="leading" secondItem="cS6-9B-Ob1" secondAttribute="leading" constant="15" id="nJg-iH-emG"/>
                             <constraint firstAttribute="bottom" secondItem="Iau-Ew-7NR" secondAttribute="bottom" id="y3C-98-ArR"/>
-                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="89p-bx-ddy" secondAttribute="bottom" id="yhf-6t-loi"/>
+                            <constraint firstItem="cS6-9B-Ob1" firstAttribute="bottom" secondItem="89p-bx-ddy" secondAttribute="bottom" constant="20" id="yhf-6t-loi"/>
                         </constraints>
                     </view>
                     <connections>
@@ -493,7 +493,7 @@
                         <rect key="frame" x="0.0" y="48" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="25"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -512,8 +512,15 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H5N-8f-Wxh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="25"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q4n-jE-mo5">
+                        <rect key="frame" x="0.0" y="-58" width="0.0" height="0.0"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="clN-Ft-E8l" kind="relationship" relationship="rootViewController" id="Y3u-Eq-tkn"/>
                     </connections>
@@ -533,7 +540,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="tTh-1J-AuW"/>
-        <segue reference="fi3-Zu-24R"/>
+        <segue reference="Y3u-Eq-tkn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name=" Pin" width="42" height="42"/>
