@@ -23,6 +23,9 @@
 		18C9B6CF292B8E8E0071B070 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6CE292B8E8E0071B070 /* MainViewController.swift */; };
 		18C9B6D1292BDCB40071B070 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6D0292BDCB40071B070 /* CustomTableViewCell.swift */; };
 		18C9B6D3292BF0580071B070 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6D2292BF0580071B070 /* PlaceModel.swift */; };
+		18E29820293CE7EC00707610 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2981F293CE7EC00707610 /* Const.swift */; };
+		18E29824293CF21000707610 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29823293CF21000707610 /* UIFont+Extensions.swift */; };
+		18E29826293CF31D00707610 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29825293CF31D00707610 /* UIImage+Extensions.swift */; };
 		18E6AC242934D925002FC651 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E6AC232934D924002FC651 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		18C9B6CE292B8E8E0071B070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18C9B6D0292BDCB40071B070 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		18C9B6D2292BF0580071B070 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		18E2981F293CE7EC00707610 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		18E29823293CF21000707610 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		18E29825293CF31D00707610 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		18E6AC232934D924002FC651 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +101,9 @@
 				18C9B6B8292AA2A50071B070 /* AppDelegate.swift */,
 				18C9B6BA292AA2A50071B070 /* SceneDelegate.swift */,
 				18C9B6C1292AA2A70071B070 /* Assets.xcassets */,
+				18E2981F293CE7EC00707610 /* Const.swift */,
+				18E29823293CF21000707610 /* UIFont+Extensions.swift */,
+				18E29825293CF31D00707610 /* UIImage+Extensions.swift */,
 				18C9B6C6292AA2A70071B070 /* Info.plist */,
 			);
 			path = SupportFiles;
@@ -217,15 +226,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E29824293CF21000707610 /* UIFont+Extensions.swift in Sources */,
 				18C9B6CF292B8E8E0071B070 /* MainViewController.swift in Sources */,
 				18A60496292CE8C40013CEDF /* NewPlaceViewController.swift in Sources */,
 				18C9B6B9292AA2A50071B070 /* AppDelegate.swift in Sources */,
 				18E6AC242934D925002FC651 /* MapViewController.swift in Sources */,
 				18B72DE0292D358A00296BF0 /* StorageManager.swift in Sources */,
+				18E29820293CE7EC00707610 /* Const.swift in Sources */,
 				18303E8E2938F738001650EF /* MapManager.swift in Sources */,
 				18A7D6392930F36800014F49 /* RatingControl.swift in Sources */,
 				18C9B6D3292BF0580071B070 /* PlaceModel.swift in Sources */,
 				18C9B6D1292BDCB40071B070 /* CustomTableViewCell.swift in Sources */,
+				18E29826293CF31D00707610 /* UIImage+Extensions.swift in Sources */,
 				18A67F8D293276630055DBD3 /* CellRating.swift in Sources */,
 				18C9B6BB292AA2A50071B070 /* SceneDelegate.swift in Sources */,
 			);
@@ -378,11 +390,12 @@
 				DEVELOPMENT_TEAM = N84H63QL52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyPlaces/SupportFiles/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) uses the camera to add a photo of your place";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) uses location for directions to your favorite place, also get place address";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -391,9 +404,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosdev54.MyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -408,11 +424,12 @@
 				DEVELOPMENT_TEAM = N84H63QL52;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyPlaces/SupportFiles/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) uses the camera to add a photo of your place";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME) uses location for directions to your favorite place, also get place address";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -421,9 +438,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosdev54.MyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

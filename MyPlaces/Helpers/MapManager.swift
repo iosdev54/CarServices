@@ -10,6 +10,9 @@ import MapKit
 
 class MapManager {
     
+    //MARK: - Private constants
+    private let segueIdentifierGetAddress = "getAddress"
+    
     let locationManager = CLLocationManager()
     
     private var placeCoordinate: CLLocationCoordinate2D?
@@ -55,7 +58,8 @@ class MapManager {
             closure()
         } else {
             //Алерт отображается если геолокация отключена глобально для всего устройства
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let `self` = self else { return }
                 self.showAlert(title: "Location Services are Disabled", message: "To enable it go: Settings -> Privacy -> Location Services and turn On.")
             }
         }
@@ -68,19 +72,21 @@ class MapManager {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
             
-            if segueIdentifier == "getAddress" {
+            if segueIdentifier == segueIdentifierGetAddress {
                 showUserLocation(mapView: mapView)
             }
             break
         case .denied:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let `self` = self else { return }
                 self.showAlert(title: "Your Location is not Available", message: "To give permission Go to: Settings -> MyPlaces -> Location")
             }
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let `self` = self else { return }
                 self.showAlert(title: "Your Location is not Available", message: "To give permission Go to: Settings -> MyPlaces -> Location")
             }
             break
@@ -104,7 +110,7 @@ class MapManager {
     }
     
     //Строим маршрут от местоположения пользователя до заведения
-    func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> (), completion: @escaping (_ distance: String, _ timeInterval: Float) -> ()) {
+    func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> (), completion: @escaping (_ distance: String, _ timeInterval: Int) -> ()) {
         
         guard let location = locationManager.location?.coordinate else {
             showAlert(title: "Error", message: "Current location is not found.")
@@ -151,10 +157,11 @@ class MapManager {
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 
-                let distance = String(format: "%.1f", route.distance / 1000)
+                let distanceInKm = String(format: "%.1f", route.distance / 1000)
                 let timeInterval = ceilf(Float(route.expectedTravelTime / 60))
+                let timeIntervalInMin = Int(timeInterval)
                 
-                completion(distance, timeInterval)
+                completion(distanceInKm, timeIntervalInMin)
             }
         }
     }

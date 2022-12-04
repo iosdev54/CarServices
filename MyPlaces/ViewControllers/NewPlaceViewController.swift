@@ -9,6 +9,9 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     
+    //MARK: - Private constants
+    private let segueIdentifierShowPlace = "showPlace"
+    
     var currentPlace: Place!
     private var imageIsChanged = false
     
@@ -39,8 +42,8 @@ class NewPlaceViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cameraIcon = UIImage(named: "camera")
-        let photoIcon = UIImage(named: "photo")
+        let cameraIcon = UIImage.cameraIcon
+        let photoIcon = UIImage.photoIcon
         
         if indexPath.row == 0 {
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -82,7 +85,7 @@ class NewPlaceViewController: UITableViewController {
     
     func savePlace() {
         
-        let image = imageIsChanged ? placeImage.image : UIImage(named: "imagePlaceholder")
+        let image = imageIsChanged ? placeImage.image : UIImage.placeholder
         
         let imageData = image?.pngData()
         
@@ -142,7 +145,7 @@ class NewPlaceViewController: UITableViewController {
         mapVC.incomeSegueIdentifier = identifier
         mapVC.mapViewControllerDelegate = self
         
-        if identifier == "showPlace" {
+        if identifier == segueIdentifierShowPlace {
             mapVC.place.name = placeName.text!
             mapVC.place.location = placeLocation.text
             mapVC.place.type = placeType.text

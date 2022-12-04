@@ -15,20 +15,24 @@ protocol MapViewControllerDelegate {
 
 class MapViewController: UIViewController {
     
-    let mapManager = MapManager()
+    //MARK: - Private constants
+    private let segueIdentifierShowPlace = "showPlace"
+    private let annotationIdentifier = "annotationIdentifier"
+
+    private let mapManager = MapManager()
     var mapViewControllerDelegate: MapViewControllerDelegate?
     var place = Place()
     
-    let annotationIdentifier = "annotationIdentifier"
     var incomeSegueIdentifier = ""
     
-    var previousLocation: CLLocation? {
+    private var previousLocation: CLLocation? {
         didSet {
             mapManager.startTrackingUserLocation(for: mapView, and: previousLocation) { [weak self] currentLocation in
                 guard let `self` = self else { return }
                 self.previousLocation = currentLocation
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                    guard let `self` = self else { return }
                     self.mapManager.showUserLocation(mapView: self.mapView)
                 }
             }
@@ -69,9 +73,10 @@ class MapViewController: UIViewController {
             guard let `self` = self else { return }
             self.previousLocation = location
         } completion: { distance, timeInterval in
-            DispatchQueue.main.async {
-                self.distanceLabel.text = "Растояние до места - \(distance) км."
-                self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин."
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
+                self.distanceLabel.text = "Растояние до места - \(distance) км"
+                self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин"
             }
         }
         
@@ -91,7 +96,7 @@ class MapViewController: UIViewController {
             mapManager.locationManager.delegate = self
         }
         
-        if incomeSegueIdentifier == "showPlace" {
+        if incomeSegueIdentifier == segueIdentifierShowPlace {
             mapManager.setupPlaceMark(place: place, mapView: mapView)
             mapPinImage.isHidden = true
             addressLabel.isHidden = true
@@ -132,8 +137,9 @@ extension MapViewController: MKMapViewDelegate {
         
         let geocoder = CLGeocoder()
         
-        if incomeSegueIdentifier == "showPlace" && previousLocation != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        if incomeSegueIdentifier == segueIdentifierShowPlace && previousLocation != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                guard let `self` = self else { return }
                 self.mapManager.showUserLocation(mapView: mapView)
             }
         }
@@ -151,7 +157,8 @@ extension MapViewController: MKMapViewDelegate {
             let streetName = placemark?.thoroughfare
             let buildNumber = placemark?.subThoroughfare
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
                 if cityName != nil, streetName != nil, buildNumber != nil {
                     self.addressLabel.text = "\(cityName!), \(streetName!), \(buildNumber!)"
                 } else if cityName != nil, streetName != nil {

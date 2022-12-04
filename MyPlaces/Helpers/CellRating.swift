@@ -48,7 +48,7 @@ import UIKit
         
         //Load image
         let bundle = Bundle(for: type(of: self))
-        let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
+        let emptyStar = UIImage(named: Const.StarImageName.empty.name, in: bundle, compatibleWith: self.traitCollection)
         
         for _ in 0 ..< starCount {
             let imageView = UIImageView()
@@ -73,7 +73,7 @@ import UIKit
         for (index, imageView) in ratingImageView.enumerated() {
             
             let bundle = Bundle(for: type(of: self))
-            let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
+            let highlightedStar = UIImage(named: Const.StarImageName.highlighted.name, in: bundle, compatibleWith: self.traitCollection)
             
             if index < rating {
                 imageView.image = highlightedStar

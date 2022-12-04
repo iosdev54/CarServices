@@ -64,9 +64,9 @@ import UIKit
         
         //Load button image
         let bundle = Bundle(for: type(of: self))
-        let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
-        let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
-        let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
+        let filledStar = UIImage(named: Const.StarImageName.filled.name, in: bundle, compatibleWith: self.traitCollection)
+        let emptyStar = UIImage(named: Const.StarImageName.empty.name, in: bundle, compatibleWith: self.traitCollection)
+        let highlightedStar = UIImage(named: Const.StarImageName.highlighted.name, in: bundle, compatibleWith: self.traitCollection)
         
         for _ in 0 ..< starCount {
             let button = UIButton()

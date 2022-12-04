@@ -10,6 +10,17 @@ import RealmSwift
 
 class MainViewController: UIViewController {
     
+    //MARK: - Private constants
+    private let segueIdentifierShowDetail = "showDetail"
+    private let segueIdentifierToNewPlaceVC = "NewPlaceVC"
+    private let cell = "Cell"
+    private let dateKeyPath = "date"
+    private let nameKeyPath = "name"
+    private let sortByName = "name CONTAINS[cd] %@"
+    private let sortByLocation = "location CONTAINS[cd] %@"
+    private let sortByType = "type CONTAINS[cd] %@"
+    private let scopeButtonTitles = ["Name", "Location", "Type"]
+    
     private let searchController = UISearchController(searchResultsController: nil)
     private var places: Results<Place>!
     private var filteredPlaces: Results<Place>!
@@ -39,9 +50,8 @@ class MainViewController: UIViewController {
         definesPresentationContext = true
         
         searchController.searchBar.delegate = self
-        searchController.searchBar.searchTextField.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Regular", size: 18) as Any], for: .normal)
-
+        searchController.searchBar.searchTextField.font = UIFont.searchTextFieldFont
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.segmentedControlFont as Any], for: .normal)
     }
     
     @IBAction func unwindSegue(_ unwindSegue: UIStoryboardSegue) {
@@ -61,14 +71,14 @@ class MainViewController: UIViewController {
         
         ascendingSorting.toggle()
         
-        reversedSortingButton.image = ascendingSorting ? UIImage(named: "AZ") : UIImage(named: "ZA")
+        reversedSortingButton.image = ascendingSorting ? UIImage.sortByAZ : UIImage.sortByZA
         
         sorting()
     }
     
     private func sorting() {
         
-        places = segmentedControl.selectedSegmentIndex == 0 ? places.sorted(byKeyPath: "date", ascending: ascendingSorting) : places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        places = segmentedControl.selectedSegmentIndex == 0 ? places.sorted(byKeyPath: dateKeyPath, ascending: ascendingSorting) : places.sorted(byKeyPath: nameKeyPath, ascending: ascendingSorting)
         
         tableView.reloadData()
     }
@@ -77,7 +87,7 @@ class MainViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "showDetail" {
+        if segue.identifier == segueIdentifierShowDetail {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             guard let newPlaceVC = segue.destination as? NewPlaceViewController else { return }
             let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
@@ -100,7 +110,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as! CustomTableViewCell
         
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
                  
@@ -136,7 +146,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
-        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.image = UIImage.delete
         deleteAction.backgroundColor = .systemRed
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
@@ -147,10 +157,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         let addAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completionHandler in
             guard let `self` = self else { return }
-            self.performSegue(withIdentifier: "NewPlaceVC", sender: self)
+            self.performSegue(withIdentifier: self.segueIdentifierToNewPlaceVC, sender: self)
             completionHandler(true)
         }
-        addAction.image = UIImage(systemName: "plus.square")
+        addAction.image = UIImage.addNewItem
         addAction.backgroundColor = .systemBlue
         
         let configuration = UISwipeActionsConfiguration(actions: [addAction])
@@ -171,10 +181,10 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     private func filterContentForSearchTaxt(_ searchText: String) {
         
     switch searchController.searchBar.selectedScopeButtonIndex {
-    case 0: filteredPlaces = places.filter("name CONTAINS[cd] %@", searchText)
-    case 1: filteredPlaces = places.filter("location CONTAINS[cd] %@", searchText)
-    case 2: filteredPlaces = places.filter("type CONTAINS[cd] %@", searchText)
-    default: filteredPlaces = places.filter("name CONTAINS[cd] %@", searchText)
+    case 0: filteredPlaces = places.filter(sortByName, searchText)
+    case 1: filteredPlaces = places.filter(sortByLocation, searchText)
+    case 2: filteredPlaces = places.filter(sortByType, searchText)
+    default: filteredPlaces = places.filter(sortByName, searchText)
     }
         tableView.reloadData()
         
@@ -187,7 +197,7 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsScopeBar = true
-        searchBar.scopeButtonTitles = ["Name", "Location", "Type"]
+        searchBar.scopeButtonTitles = scopeButtonTitles
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
