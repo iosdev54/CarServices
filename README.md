@@ -1,7 +1,7 @@
 # MyPlaces
 ### The My Places PET project is designed to save your favorite places.
 
-Capabilities:
+__Capabilities:__
 * Sorting
 * Rating
 * Change of location
@@ -10,10 +10,13 @@ Capabilities:
 * Route planning
 * Route tracking
 
-
 __Screenshots:__
 
-![1 2](https://user-images.githubusercontent.com/107141073/205288246-d2e8835b-c326-44c6-b8d7-d536d53e829c.png)
-![2 2](https://user-images.githubusercontent.com/107141073/205288265-7887ed5d-ad65-4b41-b247-6afb1acef606.png)
-![3 2](https://user-images.githubusercontent.com/107141073/205288439-7824d6e9-ebd8-44e6-a5a0-ea058af8421f.png)
-![4 2](https://user-images.githubusercontent.com/107141073/205288452-ed07a4db-27f3-4978-9580-e64883c103dc.png)
+![1](https://user-images.githubusercontent.com/107141073/205504885-a0246db8-16ef-4f73-ac07-8155997bc1a2.png)
+![2](https://user-images.githubusercontent.com/107141073/205504637-733e4775-0896-4b4f-859c-a1dd9473173c.png)
+![3](https://user-images.githubusercontent.com/107141073/205504641-6a0cffda-5cc8-455d-8298-816f91d4611c.png)
+![4](https://user-images.githubusercontent.com/107141073/205504646-15f1bac9-3473-4555-8b31-34643baecdd1.png)
+![5](https://user-images.githubusercontent.com/107141073/205504649-f7925a50-15a1-442c-ae02-156fb26d8a2a.png)
+![6](https://user-images.githubusercontent.com/107141073/205504652-7873662c-ec6c-4f0e-8974-3d6bef9fe1d0.png)
+![7](https://user-images.githubusercontent.com/107141073/205504659-4a5ae273-726d-46fd-a79d-19c86758a55a.png)
+![8](https://user-images.githubusercontent.com/107141073/205504850-1b5331d9-fc2d-45eb-a78d-962221b70d0f.png)
