@@ -9,15 +9,15 @@ import Foundation
 
 enum Const {
     
-    enum StarImageName {
+    enum oilDropImage {
         case filled
         case empty
         case highlighted
         
         var name: String {
             switch self {
-            case.empty: return "EmptyStar"
-            case .filled: return "FilledStar"
+            case.empty: return "EmptyOilDrop"
+            case .filled: return "FilledOilDrop"
             case .highlighted: return "HighlightedStar"
             }
         }

@@ -11,34 +11,34 @@ import UIKit
     
     var rating = 0 {
         didSet {
-            setupStar()
+            setupDrop()
         }
     }
     
     private var ratingImageView = [UIImageView]()
     
-    @IBInspectable var starSize: CGSize = CGSize(width: 13.0, height: 13.0) {
+    @IBInspectable var dropSize: CGSize = CGSize(width: 20.0, height: 20.0) {
         didSet {
-            setupStar()
+            setupDrop()
         }
     }
-    @IBInspectable var starCount: Int = 5 {
+    @IBInspectable var dropCount: Int = 5 {
         didSet {
-            setupStar()
+            setupDrop()
         }
     }
     
     //MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupStar()
+        setupDrop()
     }
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        setupStar()
+        setupDrop()
     }
     
-    private func setupStar() {
+    private func setupDrop() {
         
         for imageView in ratingImageView {
             removeArrangedSubview(imageView)
@@ -48,18 +48,19 @@ import UIKit
         
         //Load image
         let bundle = Bundle(for: type(of: self))
-        let emptyStar = UIImage(named: Const.StarImageName.empty.name, in: bundle, compatibleWith: self.traitCollection)
+        let emptyDrop = UIImage(named: Const.oilDropImage.empty.name, in: bundle, compatibleWith: self.traitCollection)
         
-        for _ in 0 ..< starCount {
+        for _ in 0 ..< dropCount {
             let imageView = UIImageView()
             
             //Set the button image
-            imageView.image = emptyStar
+            imageView.image = emptyDrop
+            imageView.contentMode = .scaleAspectFit
             
             //Add constraints
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.heightAnchor.constraint(equalToConstant: starSize.height) .isActive = true
-            imageView.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: dropSize.height) .isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: dropSize.width).isActive = true
             
             addArrangedSubview(imageView)
             
@@ -73,10 +74,10 @@ import UIKit
         for (index, imageView) in ratingImageView.enumerated() {
             
             let bundle = Bundle(for: type(of: self))
-            let highlightedStar = UIImage(named: Const.StarImageName.highlighted.name, in: bundle, compatibleWith: self.traitCollection)
+            let filledStar = UIImage(named: Const.oilDropImage.filled.name, in: bundle, compatibleWith: self.traitCollection)
             
             if index < rating {
-                imageView.image = highlightedStar
+                imageView.image = filledStar
             }
         }
     }

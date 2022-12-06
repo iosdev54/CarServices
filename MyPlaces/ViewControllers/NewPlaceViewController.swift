@@ -38,6 +38,13 @@ class NewPlaceViewController: UITableViewController {
         tableView.sectionHeaderTopPadding = CGFloat.leastNormalMagnitude
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     //MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

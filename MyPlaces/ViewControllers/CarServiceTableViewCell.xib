@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="160" id="KGk-i7-Jjw" customClass="CarServiceTableViewCell" customModule="MyPlaces" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="160"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkr-Sc-PaE">
+                        <rect key="frame" x="0.0" y="0.0" width="447" height="160"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tgM-qk-P6P">
+                                <rect key="frame" x="5" y="5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="syj-HH-uUC"/>
+                                    <constraint firstAttribute="width" secondItem="tgM-qk-P6P" secondAttribute="height" multiplier="1:1" id="zub-9m-RH3"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="w6L-Qd-OUg">
+                                <rect key="frame" x="165" y="15" width="272" height="102"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="VCZ-7u-GUp">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="25.333333333333332"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="iOP-eD-tnd">
+                                        <rect key="frame" x="0.0" y="25.333333333333336" width="272" height="21.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="yeh-oP-baA">
+                                        <rect key="frame" x="0.0" y="47" width="272" height="20.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="6Ib-Ck-hSX">
+                                        <rect key="frame" x="0.0" y="67.666666666666671" width="272" height="34.333333333333329"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpC-eG-kNC">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="34.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgz-zG-emP">
+                                                <rect key="frame" x="223.33333333333331" y="0.0" width="48.666666666666686" height="34.333333333333336"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="phone.fill" catalog="system" renderingMode="original"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="phoneTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8Fv-TW-EgZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="33" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZG2-OC-Web" customClass="CellRating" customModule="MyPlaces" customModuleProvider="target">
+                                <rect key="frame" x="201" y="122" width="200" height="33"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                        <size key="value" width="20" height="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ZG2-OC-Web" firstAttribute="centerX" secondItem="VCZ-7u-GUp" secondAttribute="centerX" id="0qo-Hn-9C7"/>
+                            <constraint firstItem="w6L-Qd-OUg" firstAttribute="top" secondItem="rkr-Sc-PaE" secondAttribute="top" constant="15" id="A5z-X7-u3q"/>
+                            <constraint firstAttribute="bottom" secondItem="tgM-qk-P6P" secondAttribute="bottom" constant="5" id="FKs-YD-TsF"/>
+                            <constraint firstItem="tgM-qk-P6P" firstAttribute="leading" secondItem="rkr-Sc-PaE" secondAttribute="leading" constant="5" id="eBv-N1-ik8"/>
+                            <constraint firstItem="w6L-Qd-OUg" firstAttribute="leading" secondItem="tgM-qk-P6P" secondAttribute="trailing" constant="10" id="lOm-0c-7rb"/>
+                            <constraint firstAttribute="trailing" secondItem="w6L-Qd-OUg" secondAttribute="trailing" constant="10" id="mNi-9B-LIk"/>
+                            <constraint firstItem="ZG2-OC-Web" firstAttribute="top" secondItem="w6L-Qd-OUg" secondAttribute="bottom" constant="5" id="osG-pR-HiV"/>
+                            <constraint firstItem="tgM-qk-P6P" firstAttribute="top" secondItem="rkr-Sc-PaE" secondAttribute="top" constant="5" id="q76-ez-Jkz"/>
+                            <constraint firstItem="ZG2-OC-Web" firstAttribute="bottom" secondItem="tgM-qk-P6P" secondAttribute="bottom" id="uGB-z1-Joc"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="rkr-Sc-PaE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UjZ-qj-V69"/>
+                    <constraint firstAttribute="bottom" secondItem="rkr-Sc-PaE" secondAttribute="bottom" id="hDy-yS-CKP"/>
+                    <constraint firstItem="rkr-Sc-PaE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lnQ-7i-iCi"/>
+                    <constraint firstAttribute="trailing" secondItem="rkr-Sc-PaE" secondAttribute="trailing" id="t5E-M6-vnX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="cellRating" destination="ZG2-OC-Web" id="tGJ-za-YIv"/>
+                <outlet property="imageOfPlace" destination="tgM-qk-P6P" id="P8D-OE-93J"/>
+                <outlet property="locationLabel" destination="yeh-oP-baA" id="gQM-T1-mdg"/>
+                <outlet property="nameLabel" destination="VCZ-7u-GUp" id="QxV-aM-m9Y"/>
+                <outlet property="phoneLabel" destination="BpC-eG-kNC" id="NgO-3c-4kg"/>
+                <outlet property="typeLabel" destination="iOP-eD-tnd" id="xcf-lt-01V"/>
+                <outlet property="view" destination="rkr-Sc-PaE" id="kmh-l9-Uk2"/>
+            </connections>
+            <point key="canvasLocation" x="206.87022900763358" y="-16.197183098591552"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="ZG2-OC-Web">
+            <size key="intrinsicContentSize" width="200" height="33"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="phone.fill" catalog="system" width="128" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

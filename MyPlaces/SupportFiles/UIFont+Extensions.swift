@@ -12,6 +12,6 @@ extension UIFont {
     
     static let searchTextFieldFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
     static let segmentedControlFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 18)
-    
+    static let navigationBarFont = UIFont(name: "AppleSDGothicNeo-Regular", size: 25)
     
 }
