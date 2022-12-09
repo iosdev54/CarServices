@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Wrench.png",
+      "filename" : "TitleIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "TitleIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "TitleIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

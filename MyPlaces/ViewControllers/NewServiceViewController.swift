@@ -1,5 +1,5 @@
 //
-//  NewPlaceViewController.swift
+//  NewServiceViewController.swift
 //  MyPlaces
 //
 //  Created by Dmytro Grytsenko on 22.11.2022.
@@ -7,19 +7,20 @@
 
 import UIKit
 
-class NewPlaceViewController: UITableViewController {
+class NewServiceViewController: UITableViewController {
     
     //MARK: - Private constants
-    private let segueIdentifierShowPlace = "showPlace"
+    private let segueIdentifierShowService = "showService"
     
-    var currentPlace: Place!
+    var currentService: Service!
     private var imageIsChanged = false
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var placeImage: UIImageView!
-    @IBOutlet weak var placeName: UITextField!
-    @IBOutlet weak var placeLocation: UITextField!
-    @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var serviceImage: UIImageView!
+    @IBOutlet weak var serviceName: UITextField!
+    @IBOutlet weak var serviceType: UITextField!
+    @IBOutlet weak var serviceLocation: UITextField!
+    @IBOutlet weak var servicePhone: UITextField!
     @IBOutlet weak var ratingControl: RatingControl!
     
     override func viewDidLoad() {
@@ -28,9 +29,11 @@ class NewPlaceViewController: UITableViewController {
         saveButton.isEnabled = false
         
         //Для отслеживания редактирования поля name
-        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        serviceName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
         setupEditScreen()
+        
+        tableView.makeCorner(with: 10)
         
         //Убираем границу под рейтингом
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: CGFloat.leastNormalMagnitude))
@@ -90,44 +93,46 @@ class NewPlaceViewController: UITableViewController {
         return .leastNormalMagnitude
     }
     
-    func savePlace() {
+    func saveService() {
         
-        let image = imageIsChanged ? placeImage.image : UIImage.placeholder
+        let image = imageIsChanged ? serviceImage.image : UIImage.placeholder
         
         let imageData = image?.pngData()
         
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData, rating: Double(ratingControl.rating))
+        let newService = Service(name: serviceName.text!, type: serviceType.text, location: serviceLocation.text, phone: servicePhone.text, imageData: imageData, rating: Double(ratingControl.rating))
         
-        if currentPlace != nil {
+        if currentService != nil {
             try! realm.write {
-                currentPlace?.name = newPlace.name
-                currentPlace?.location = newPlace.location
-                currentPlace?.type = newPlace.type
-                currentPlace?.imageData = newPlace.imageData
-                currentPlace?.rating = newPlace.rating
+                currentService?.name = newService.name
+                currentService?.type = newService.type
+                currentService?.location = newService.location
+                currentService?.phone = newService.phone
+                currentService?.imageData = newService.imageData
+                currentService?.rating = newService.rating
             }
         } else {
-            StorageManager.saveObject(newPlace)
+            StorageManager.saveObject(newService)
         }
     }
     
     private func setupEditScreen() {
         
-        if currentPlace != nil {
+        if currentService != nil {
             
             setupNavigationBar()
             
             imageIsChanged = true
             
-            placeName.text = currentPlace.name
-            placeLocation.text = currentPlace.location
-            placeType.text = currentPlace.type
-            ratingControl.rating = Int(currentPlace.rating)
+            serviceName.text = currentService.name
+            serviceType.text = currentService.type
+            serviceLocation.text = currentService.location
+            servicePhone.text = currentService.phone
+            ratingControl.rating = Int(currentService.rating)
             
-            guard let data = currentPlace?.imageData, let image = UIImage(data: data) else { return }
-            placeImage.image = image
-            placeImage.contentMode = .scaleAspectFill
-            placeImage.clipsToBounds = true
+            guard let data = currentService?.imageData, let image = UIImage(data: data) else { return }
+            serviceImage.image = image
+            serviceImage.contentMode = .scaleAspectFill
+            serviceImage.clipsToBounds = true
         }
     }
     
@@ -137,7 +142,7 @@ class NewPlaceViewController: UITableViewController {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
         navigationItem.leftBarButtonItem = nil
-        title = currentPlace?.name
+        title = currentService?.name
         saveButton.isEnabled = true
     }
     
@@ -152,18 +157,18 @@ class NewPlaceViewController: UITableViewController {
         mapVC.incomeSegueIdentifier = identifier
         mapVC.mapViewControllerDelegate = self
         
-        if identifier == segueIdentifierShowPlace {
-            mapVC.place.name = placeName.text!
-            mapVC.place.location = placeLocation.text
-            mapVC.place.type = placeType.text
-            mapVC.place.imageData = placeImage.image?.pngData()
+        if identifier == segueIdentifierShowService {
+            mapVC.place.name = serviceName.text!
+            mapVC.place.location = serviceLocation.text
+            mapVC.place.type = serviceType.text
+            mapVC.place.imageData = serviceImage.image?.pngData()
         }
     }
     
 }
 //MARK: - Text field delegate
 
-extension NewPlaceViewController: UITextFieldDelegate {
+extension NewServiceViewController: UITextFieldDelegate {
     
     //Скрываем клавиатуту по нажатию на done
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -173,14 +178,14 @@ extension NewPlaceViewController: UITextFieldDelegate {
     
     @objc private func textFieldChanged() {
         
-        saveButton.isEnabled = placeName.text?.isEmpty == false ? true : false
+        saveButton.isEnabled = serviceName.text?.isEmpty == false ? true : false
     }
     
 }
 
 //MARK: - Work with image
 
-extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension NewServiceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourse) {
@@ -195,9 +200,9 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        placeImage.image = info[.editedImage] as? UIImage
-        placeImage.contentMode = .scaleAspectFill
-        placeImage.clipsToBounds = true
+        serviceImage.image = info[.editedImage] as? UIImage
+        serviceImage.contentMode = .scaleAspectFill
+        serviceImage.clipsToBounds = true
         
         imageIsChanged = true
         
@@ -207,10 +212,10 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
 }
 
 //MARK: - MapViewControllerDelegate
-extension NewPlaceViewController: MapViewControllerDelegate {
+extension NewServiceViewController: MapViewControllerDelegate {
     
     func getAddress(_ address: String?) {
        
-        placeLocation.text = address
+        serviceLocation.text = address
     }
 }

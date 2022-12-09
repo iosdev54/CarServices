@@ -12,10 +12,10 @@ extension UIImage {
     
     static let sortByAZ = UIImage(named: "AZ")
     static let sortByZA = UIImage(named: "ZA")
-    static let placeholder = UIImage(named: "Placeholder")
+    static let placeholder = UIImage(named: "ServiceImage")
     
     //Icon for the Title in NavBar
-    static let titleIcon = UIImage(named: "Wrench")
+    static let titleIcon = UIImage(named: "TitleIcon")
     
     //Icon for the AlertController
     static let cameraIcon = UIImage(named: "Camera")

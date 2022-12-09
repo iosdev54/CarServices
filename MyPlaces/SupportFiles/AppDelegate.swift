@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(Realm.Configuration.defaultConfiguration.fileURL)
 
         //Change an Object Model
-        let schemaVersion: UInt64 = 3
+        let schemaVersion: UInt64 = 1
         // When you open the realm, specify that the schema
         // is now using a newer version.
         let config = Realm.Configuration(

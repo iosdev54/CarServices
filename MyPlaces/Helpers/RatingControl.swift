@@ -76,6 +76,7 @@ import UIKit
             button.setImage(filledStar, for: .selected)
             button.setImage(highlightedStar, for: .highlighted)
             button.setImage(highlightedStar, for: [.highlighted, .selected])
+            button.imageView?.contentMode = .scaleAspectFit
             
             //Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false

@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
 
     private let mapManager = MapManager()
     var mapViewControllerDelegate: MapViewControllerDelegate?
-    var place = Place()
+    var place = Service()
     
     var incomeSegueIdentifier = ""
     

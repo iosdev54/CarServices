@@ -20,7 +20,7 @@ class MapManager {
     private let regionInMetters = 1000.00
     
     //Мвркер заведения
-    func setupPlaceMark(place: Place, mapView: MKMapView) {
+    func setupPlaceMark(place: Service, mapView: MKMapView) {
         
         guard let location = place.location else { return }
         

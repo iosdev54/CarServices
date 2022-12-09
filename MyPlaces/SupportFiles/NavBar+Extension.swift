@@ -11,36 +11,36 @@ import UIKit
 extension UINavigationController {
     
     func customTitleInNavBar() {
-    
+        
         let imageView = UIImageView()
-            NSLayoutConstraint.activate([
-                imageView.heightAnchor.constraint(equalToConstant: 30),
-                imageView.widthAnchor.constraint(equalToConstant: 30)
-            ])
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 30),
+            imageView.widthAnchor.constraint(equalToConstant: 30)
+        ])
         imageView.image = UIImage(named: "Wrench")
         imageView.contentMode = .scaleAspectFit
-            
-            let titleLabel = UILabel()
-            titleLabel.text = "Auto Services"
-            titleLabel.font = UIFont.navigationBarFont
-            
-            let hStack = UIStackView(arrangedSubviews: [imageView, titleLabel])
-            hStack.spacing = 7
-            hStack.alignment = .center
-            
-            navigationItem.titleView = hStack
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Auto Services"
+        titleLabel.font = UIFont.navigationBarFont
+        
+        let hStack = UIStackView(arrangedSubviews: [imageView, titleLabel])
+        hStack.spacing = 7
+        hStack.alignment = .center
+        
+        navigationItem.titleView = hStack
     }
     
     func addCustomBottomLine(color:UIColor,height:Double)
     {
         //Hiding Default Line and Shadow
         navigationBar.setValue(true, forKey: "hidesShadow")
-    
+        
         //Creating New line
         let lineView = UIView(frame: CGRect(x: 0, y: 0, width:0, height: height))
         lineView.backgroundColor = color
         navigationBar.addSubview(lineView)
-    
+        
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.widthAnchor.constraint(equalTo: navigationBar.widthAnchor).isActive = true
         lineView.heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
@@ -48,18 +48,4 @@ extension UINavigationController {
         lineView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor).isActive = true
     }
     
-    func adddddd() {
-        guard let navigationBar = navigationController?.navigationBar else { return }
-        navigationBar.isTranslucent = true
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithTransparentBackground()
-            appearance.backgroundImage = UIImage()
-            appearance.backgroundColor = .gray
-            navigationBar.standardAppearance = appearance
-        } else {
-            navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
-        }
-    }
 }
