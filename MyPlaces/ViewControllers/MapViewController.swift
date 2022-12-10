@@ -16,7 +16,7 @@ protocol MapViewControllerDelegate {
 class MapViewController: UIViewController {
     
     //MARK: - Private constants
-    private let segueIdentifierShowPlace = "showPlace"
+    private let segueIdentifierShowPlace = "showService"
     private let annotationIdentifier = "annotationIdentifier"
 
     private let mapManager = MapManager()

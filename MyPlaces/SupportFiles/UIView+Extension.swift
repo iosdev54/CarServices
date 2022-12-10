@@ -13,7 +13,7 @@ extension UIView {
     func applyShadow(cornerRadius: CGFloat) {
         
         layer.cornerRadius = cornerRadius
-//        clipsToBounds = true
+        //        clipsToBounds = true
         layer.masksToBounds = false
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = .zero

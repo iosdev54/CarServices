@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewServiceViewController: UITableViewController {
+class NewServiceViewController: UIViewController {
     
     //MARK: - Private constants
     private let segueIdentifierShowService = "showService"
@@ -15,6 +15,18 @@ class NewServiceViewController: UITableViewController {
     var currentService: Service!
     private var imageIsChanged = false
     
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.applyShadow(cornerRadius: 10)
+        }
+    }
+    
+    @IBOutlet weak var contentView: UIView! {
+        didSet {
+            contentView.makeCorner(with: 10)
+        }
+    }
+
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var serviceImage: UIImageView!
     @IBOutlet weak var serviceName: UITextField!
@@ -32,13 +44,10 @@ class NewServiceViewController: UITableViewController {
         serviceName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
         setupEditScreen()
+                
+        hideKeyboardWhenTappedAround()
         
-        tableView.makeCorner(with: 10)
-        
-        //Убираем границу под рейтингом
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: CGFloat.leastNormalMagnitude))
-        //Убираем отстпуп над секцией
-        tableView.sectionHeaderTopPadding = CGFloat.leastNormalMagnitude
+        showAndHideKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,51 +55,6 @@ class NewServiceViewController: UITableViewController {
         
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    //MARK: - Table view delegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cameraIcon = UIImage.cameraIcon
-        let photoIcon = UIImage.photoIcon
-        
-        if indexPath.row == 0 {
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let camera = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
-                guard let `self` = self else { return }
-                self.chooseImagePicker(sourse: .camera)
-            }
-            camera.setValue(cameraIcon, forKey: "image")
-            camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-            
-            let photo = UIAlertAction(title: "Photo", style: .default) { [weak self] _ in
-                guard let `self` = self else { return }
-                self.chooseImagePicker(sourse: .photoLibrary)
-            }
-            photo.setValue(photoIcon, forKey: "image")
-            photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            actionSheet.addAction(camera)
-            actionSheet.addAction(photo)
-            actionSheet.addAction(cancel)
-            
-            present(actionSheet, animated: true)
-            
-        } else {
-            //Скрываем клавиатуту по нажатию за пределами клавиатуры и прелелами первой ячейки
-            view.endEditing(true)
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
     }
     
     func saveService() {
@@ -146,6 +110,24 @@ class NewServiceViewController: UITableViewController {
         saveButton.isEnabled = true
     }
     
+    @IBAction func addImageAction(_ sender: UIButton) {
+        
+        let camera = UIAction( title: "Camera", image: UIImage(systemName: "camera")) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.chooseImagePicker(sourse: .camera)
+        }
+        
+        let photo = UIAction( title: "Photo", image: UIImage(systemName: "photo")) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.chooseImagePicker(sourse: .photoLibrary)
+        }
+        let menuActions = [camera, photo]
+        let menu = UIMenu( title: "Select sourse of photo", children: menuActions)
+        
+        sender.showsMenuAsPrimaryAction = true
+        sender.menu = menu
+    }
+    
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
@@ -167,13 +149,29 @@ class NewServiceViewController: UITableViewController {
     
 }
 //MARK: - Text field delegate
-
 extension NewServiceViewController: UITextFieldDelegate {
     
     //Скрываем клавиатуту по нажатию на done
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let maxLength: Int!
+        
+        switch textField {
+        case serviceLocation: maxLength = 45
+        default:
+            maxLength = 15
+        }
+
+          let currentString = (textField.text ?? "") as NSString
+          let newString = currentString.replacingCharacters(in: range, with: string)
+
+          return newString.count <= maxLength
     }
     
     @objc private func textFieldChanged() {
@@ -183,8 +181,7 @@ extension NewServiceViewController: UITextFieldDelegate {
     
 }
 
-//MARK: - Work with image
-
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension NewServiceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
@@ -215,7 +212,43 @@ extension NewServiceViewController: UIImagePickerControllerDelegate, UINavigatio
 extension NewServiceViewController: MapViewControllerDelegate {
     
     func getAddress(_ address: String?) {
-       
         serviceLocation.text = address
     }
+}
+
+//MARK: - Show and Hide Keyboard
+extension NewServiceViewController {
+    func hideKeyboardWhenTappedAround() {
+        
+        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+                scrollViewTap.numberOfTapsRequired = 1
+                scrollView.addGestureRecognizer(scrollViewTap)
+    }
+    
+    func showAndHideKeyboard() {
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func hideKeyboard() {
+
+        scrollView.endEditing(true)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            scrollView.contentInset = .zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom + 10, right: 0)
+        }
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
 }
