@@ -12,6 +12,7 @@ import UIKit
     var rating = 0 {
         didSet {
             updateButtonSelectionState()
+            dropAnimation()
         }
     }
     
@@ -101,7 +102,7 @@ import UIKit
     }
     
     func dropAnimation() {
-                
+        
         for (index, button) in ratingButtons.enumerated() {
             
             button.transform = CGAffineTransform(scaleX: 0, y: 0)

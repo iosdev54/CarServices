@@ -5,7 +5,6 @@
 //  Created by Dmytro Grytsenko on 06.12.2022.
 //
 
-import Foundation
 import UIKit
 
 extension UIView {
@@ -13,7 +12,6 @@ extension UIView {
     func applyShadow(cornerRadius: CGFloat) {
         
         layer.cornerRadius = cornerRadius
-        //        clipsToBounds = true
         layer.masksToBounds = false
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = .zero

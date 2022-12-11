@@ -109,10 +109,10 @@
 				18C9B6BA292AA2A50071B070 /* SceneDelegate.swift */,
 				18C9B6C1292AA2A70071B070 /* Assets.xcassets */,
 				18E2981F293CE7EC00707610 /* Const.swift */,
-				18E29823293CF21000707610 /* UIFont+Extensions.swift */,
-				18A805D8293F553A000F42B0 /* UIView+Extension.swift */,
-				18E29825293CF31D00707610 /* UIImage+Extensions.swift */,
 				18B1D98E293E92580095936E /* NavBar+Extension.swift */,
+				18E29823293CF21000707610 /* UIFont+Extensions.swift */,
+				18E29825293CF31D00707610 /* UIImage+Extensions.swift */,
+				18A805D8293F553A000F42B0 /* UIView+Extension.swift */,
 				18C9B6C6292AA2A70071B070 /* Info.plist */,
 			);
 			path = SupportFiles;

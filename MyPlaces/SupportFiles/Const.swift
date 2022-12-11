@@ -21,7 +21,6 @@ enum Const {
             case .highlighted: return "HighlightedOilDrop"
             }
         }
-        
     }
     
 }

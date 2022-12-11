@@ -244,10 +244,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgp-DO-wA1">
-                                <rect key="frame" x="14" y="144" width="386" height="718"/>
+                                <rect key="frame" x="14" y="92" width="386" height="770"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-w0-6sI" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="386" height="774"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="386" height="794"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ehx-Tr-8sO">
                                                 <rect key="frame" x="0.0" y="0.0" width="386" height="386"/>
@@ -332,10 +332,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tpu-5Q-kBe">
-                                                <rect key="frame" x="10" y="666" width="366" height="88"/>
+                                                <rect key="frame" x="10" y="666" width="366" height="128"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hr5-md-E74">
-                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="88"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate the service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-iZ-4V5">
                                                                 <rect key="frame" x="116.5" y="0.0" width="133" height="24"/>
@@ -346,10 +346,14 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-1e-kDC" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
                                                                 <rect key="frame" x="73" y="44" width="220" height="44"/>
                                                             </stackView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjz-fw-whi">
+                                                                <rect key="frame" x="63" y="108" width="240" height="20"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="20" id="fMJ-Fi-bea"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="hr7-1e-kDC" secondAttribute="bottom" constant="20" id="VEf-ZH-hJc"/>
-                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
@@ -406,7 +410,7 @@
                                             <constraint firstItem="tpu-5Q-kBe" firstAttribute="top" secondItem="zCf-SS-eBU" secondAttribute="bottom" constant="10" id="7Wu-L3-cjV"/>
                                             <constraint firstAttribute="trailing" secondItem="Gno-ub-5nT" secondAttribute="trailing" constant="10" id="A6X-G8-eCR"/>
                                             <constraint firstItem="SRP-b6-UGK" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="AY0-Pm-CNs"/>
-                                            <constraint firstAttribute="bottom" secondItem="tpu-5Q-kBe" secondAttribute="bottom" constant="20" id="B4M-UE-gIg"/>
+                                            <constraint firstAttribute="bottom" secondItem="tpu-5Q-kBe" secondAttribute="bottom" id="B4M-UE-gIg"/>
                                             <constraint firstAttribute="trailing" secondItem="djw-2u-FR7" secondAttribute="trailing" constant="10" id="Cr0-kl-Vx5"/>
                                             <constraint firstAttribute="trailing" secondItem="zCf-SS-eBU" secondAttribute="trailing" constant="10" id="FCR-bG-5bk"/>
                                             <constraint firstItem="FNc-5q-bYX" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="FTA-7k-CWr"/>
