@@ -12,17 +12,16 @@ let realm = try! Realm()
 
 class StorageManager {
     
-    static func saveObject(_ place: Service) {
+    static func saveObject(_ service: Service) {
         try! realm.write {
-            realm.add(place)
+            realm.add(service)
         }
     }
     
-    static func deleteObject(_ place: Service) {
+    static func deleteObject(_ service: Service) {
         try! realm.write {
-            realm.delete(place)
+            realm.delete(service)
         }
     }
     
 }
-

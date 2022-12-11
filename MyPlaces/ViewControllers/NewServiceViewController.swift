@@ -33,12 +33,14 @@ class NewServiceViewController: UIViewController {
     @IBOutlet weak var serviceType: UITextField!
     @IBOutlet weak var serviceLocation: UITextField!
     @IBOutlet weak var servicePhone: UITextField!
+    @IBOutlet weak var rateService: UIStackView!
     @IBOutlet weak var ratingControl: RatingControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         saveButton.isEnabled = false
+        rateService.isHidden = true
         
         //Для отслеживания редактирования поля name
         serviceName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -55,6 +57,17 @@ class NewServiceViewController: UIViewController {
         
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+           
+            guard let `self` = self else { return }
+            self.rateService.isHidden = false
+            self.ratingControl.dropAnimation()
+        }
     }
     
     func saveService() {
@@ -140,10 +153,10 @@ class NewServiceViewController: UIViewController {
         mapVC.mapViewControllerDelegate = self
         
         if identifier == segueIdentifierShowService {
-            mapVC.place.name = serviceName.text!
-            mapVC.place.location = serviceLocation.text
-            mapVC.place.type = serviceType.text
-            mapVC.place.imageData = serviceImage.image?.pngData()
+            mapVC.service.name = serviceName.text!
+            mapVC.service.location = serviceLocation.text
+            mapVC.service.type = serviceType.text
+            mapVC.service.imageData = serviceImage.image?.pngData()
         }
     }
     

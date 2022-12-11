@@ -17,12 +17,12 @@ import UIKit
     
     private var ratingButtons = [UIButton]()
     
-    @IBInspectable var starSize: CGSize = CGSize(width: 44.0, height: 44.0) {
+    @IBInspectable var dropSize: CGSize = CGSize(width: 44.0, height: 44.0) {
         didSet {
             setupButtons()
         }
     }
-    @IBInspectable var starCount: Int = 5 {
+    @IBInspectable var dropCount: Int = 5 {
         didSet {
             setupButtons()
         }
@@ -64,28 +64,28 @@ import UIKit
         
         //Load button image
         let bundle = Bundle(for: type(of: self))
-        let filledStar = UIImage(named: Const.oilDropImage.filled.name, in: bundle, compatibleWith: self.traitCollection)
-        let emptyStar = UIImage(named: Const.oilDropImage.empty.name, in: bundle, compatibleWith: self.traitCollection)
-        let highlightedStar = UIImage(named: Const.oilDropImage.highlighted.name, in: bundle, compatibleWith: self.traitCollection)
+        let filledDrop = UIImage(named: Const.oilDropImage.filled.name, in: bundle, compatibleWith: self.traitCollection)
+        let emptyDrop = UIImage(named: Const.oilDropImage.empty.name, in: bundle, compatibleWith: self.traitCollection)
+        let highlightedDrop = UIImage(named: Const.oilDropImage.highlighted.name, in: bundle, compatibleWith: self.traitCollection)
         
-        for _ in 0 ..< starCount {
+        for _ in 0 ..< dropCount {
             let button = UIButton()
             
             //Set the button image
-            button.setImage(emptyStar, for: .normal)
-            button.setImage(filledStar, for: .selected)
-            button.setImage(highlightedStar, for: .highlighted)
-            button.setImage(highlightedStar, for: [.highlighted, .selected])
+            button.setImage(emptyDrop, for: .normal)
+            button.setImage(filledDrop, for: .selected)
+            button.setImage(highlightedDrop, for: .highlighted)
+            button.setImage(highlightedDrop, for: [.highlighted, .selected])
             button.imageView?.contentMode = .scaleAspectFit
             
             //Add constraints
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: starSize.height) .isActive = true
-            button.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
+            button.heightAnchor.constraint(equalToConstant: dropSize.height) .isActive = true
+            button.widthAnchor.constraint(equalToConstant: dropSize.width).isActive = true
             
             //Setup the button action
             button.addTarget(self, action: #selector(ratingButtonTapped), for: .touchUpInside)
-        
+            
             addArrangedSubview(button)
             ratingButtons.append(button)
         }
@@ -97,6 +97,21 @@ import UIKit
         for (index, button) in ratingButtons.enumerated() {
             
             button.isSelected = index < rating
+        }
+    }
+    
+    func dropAnimation() {
+                
+        for (index, button) in ratingButtons.enumerated() {
+            
+            button.transform = CGAffineTransform(scaleX: 0, y: 0)
+            
+            let delay = Double(index) * 0.3
+            
+            UIView.animate(withDuration: 0.6, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+                
+                button.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
         }
     }
     

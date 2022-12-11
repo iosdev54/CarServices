@@ -17,11 +17,14 @@ extension UIImage {
     //Icon for the Title in NavBar
     static let titleIcon = UIImage(named: "TitleIcon")
     
-    //Icon for the AlertController
-    static let cameraIcon = UIImage(named: "Camera")
-    static let photoIcon = UIImage(named: "Photo")
+    //Icon for the leftBarButtonItem
+    static let leftBarImage = UIImage(systemName: "arrow.up.arrow.down")
     
-    //Icon for the swipeAction
+    //Icon for the sortFunction
+    static let ascending = UIImage(systemName: "arrow.down")
+    static let descending = UIImage(systemName: "arrow.up")
+    
+    //Icon for the alertController
+    static let call = UIImage(systemName: "iphone")
     static let delete = UIImage(systemName: "trash")
-    static let addNewItem = UIImage(systemName: "plus.square")
 }

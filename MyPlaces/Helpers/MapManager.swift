@@ -145,11 +145,11 @@ class MapManager {
              self.mapView.addOverlay(route.polyline)
              self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
              
-             let distance = String(format: "%.1f", route.distance / 1000)
+             let distanceInKm = String(format: "%.1f", route.distance / 1000)
              let timeInterval = ceilf(Float(route.expectedTravelTime / 60))
-             self.distanceLabel.text = "Растояние до места - \(distance) км."
-             self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин."
-             }
+             let timeIntervalInMin = Int(timeInterval)
+             
+             completion(distanceInKm, timeIntervalInMin)
              */
             
             //For first route
@@ -215,12 +215,6 @@ class MapManager {
         alert.addAction(okAction)
         
         activeVC()?.present(alert, animated: true)
-        
-        //        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        //        alertWindow.rootViewController = UIViewController()
-        //        alertWindow.windowLevel = UIWindow.Level.alert + 1
-        //        alertWindow.makeKeyAndVisible()
-        //        alertWindow.rootViewController?.present(alert, animated: true)
     }
     
     private func activeVC() -> UIViewController? {
@@ -241,5 +235,3 @@ class MapManager {
     }
     
 }
-
-

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "HighlightedOilDrop.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "pngfind.com-map-pin-png-57923.png",
+      "filename" : "HighlightedOilDrop@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "HighlightedOilDrop@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

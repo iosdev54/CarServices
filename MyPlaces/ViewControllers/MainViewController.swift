@@ -48,45 +48,10 @@ class MainViewController: UIViewController {
         
         customTitleInNavBar()
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
-        tableView.addGestureRecognizer(longPress)
+        longPressAction(with: tableView)
     }
     
-    @objc private func handleLongPress(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            let touchPoint = sender.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                
-                let alertController = UIAlertController(title: "Are you sure you want to delete the service?", message: nil, preferredStyle: .actionSheet)
-                let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-                    guard let `self` = self else { return }
-                    let service = self.services[indexPath.row]
-                    StorageManager.deleteObject(service)
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-                
-                alertController.addAction(delete)
-                alertController.addAction(cancel)
-                
-                present(alertController, animated: true)
-            }
-        }
-    }
-    
-    private func setupSearchController() {
-        
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        navigationItem.hidesSearchBarWhenScrolling = true
-        searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        searchController.searchBar.delegate = self
-        searchController.searchBar.searchTextField.font = UIFont.searchTextFieldFont
-    }
-    
-    func customTitleInNavBar() {
+    private func customTitleInNavBar() {
         
         let imageView = UIImageView()
         NSLayoutConstraint.activate([
@@ -117,46 +82,10 @@ class MainViewController: UIViewController {
     
     @IBAction func sorting(_ sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: "Sorting", message: "Select type", preferredStyle: .actionSheet)
-        let aspending = UIAlertAction(title: "Asсending", style: .default) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: true)
-            self.tableView.reloadData()
-        }
-        let descending = UIAlertAction(title: "Descending", style: .default) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: false)
-            self.tableView.reloadData()
-        }
-        let latest = UIAlertAction(title: "Latest", style: .default) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.services = self.services.sorted(byKeyPath: self.dateKeyPath, ascending: false)
-            self.tableView.reloadData()
-        }
-        let oldest = UIAlertAction(title: "Oldest", style: .default) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.services = self.services.sorted(byKeyPath: self.dateKeyPath, ascending: true)
-            self.tableView.reloadData()
-        }
-        let rating = UIAlertAction(title: "Rating", style: .default) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.services = self.services.sorted(byKeyPath: self.ratingKeyPath, ascending: false)
-            self.tableView.reloadData()
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alertController.addAction(aspending)
-        alertController.addAction(descending)
-        alertController.addAction(latest)
-        alertController.addAction(oldest)
-        alertController.addAction(rating)
-        alertController.addAction(cancel)
-        
-        present(alertController, animated: true)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortFunction())
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == segueIdentifierShowDetail {
@@ -166,10 +95,9 @@ class MainViewController: UIViewController {
             newServiceVC.currentService = service
         }
     }
-    
 }
-// MARK: - Table view data source, delegate
 
+// MARK: - Table view data source, delegate
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -204,41 +132,22 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return true
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let service = services[indexPath.row]
-//
-//        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-//            StorageManager.deleteObject(service)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            completionHandler(true)
-//        }
-//        deleteAction.image = UIImage.delete
-//        deleteAction.backgroundColor = .systemRed
-//
-//        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-//        return configuration
-//    }
-//
-//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let addAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completionHandler in
-//            guard let `self` = self else { return }
-//            self.performSegue(withIdentifier: self.segueIdentifierNewService, sender: self)
-//            completionHandler(true)
-//        }
-//        addAction.image = UIImage.addNewItem
-//        addAction.backgroundColor = .systemBlue
-//
-//        let configuration = UISwipeActionsConfiguration(actions: [addAction])
-//        return configuration
-//    }
-    
-    
 }
 
 //MARK: - UISearchController
 extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    
+    private func setupSearchController() {
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = true
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        searchController.searchBar.searchTextField.font = UIFont.searchTextFieldFont
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -269,6 +178,92 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsScopeBar = false
+    }
+    
+}
+
+//MARK: - Sorting function
+extension MainViewController {
+    
+    private func sortFunction() -> UIMenu {
+        
+        let ascending = UIAction( title: "Asсending", image: UIImage.ascending) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: true)
+            self.tableView.reloadData()
+        }
+        let descending = UIAction( title: "Descending", image: UIImage.descending) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: false)
+            self.tableView.reloadData()
+        }
+        let latest = UIAction( title: "Latest") { [weak self] _ in
+            guard let `self` = self else { return }
+            self.services = self.services.sorted(byKeyPath: self.dateKeyPath, ascending: false)
+            self.tableView.reloadData()
+        }
+        let oldest = UIAction( title: "Oldest") { [weak self] _ in
+            guard let `self` = self else { return }
+            self.services = self.services.sorted(byKeyPath: self.dateKeyPath, ascending: true)
+            self.tableView.reloadData()
+        }
+        let rating = UIAction( title: "Rating", image: UIImage(named: Const.oilDropImage.filled.name)) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.services = self.services.sorted(byKeyPath: self.ratingKeyPath, ascending: false)
+            self.tableView.reloadData()
+        }
+        
+        let menuActions = [ascending, descending, latest, oldest, rating]
+        let menu = UIMenu(children: menuActions)
+        
+        return menu
+    }
+}
+
+//MARK: - Long press action and delete service
+extension MainViewController {
+    
+    private func longPressAction(with tableView: UITableView) {
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+        tableView.addGestureRecognizer(longPress)
+    }
+    
+    @objc private func handleLongPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let touchPoint = sender.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                
+                //Вибрация при выборе ячейки
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                
+                let alertController = UIAlertController(title: "What do you want to do?", message: nil, preferredStyle: .actionSheet)
+                
+                let call = UIAlertAction(title: "Call", style: .default) { [weak self] _ in
+                    guard let `self` = self else { return }
+                    print("Call")
+                }
+            
+                call.setValue(UIImage.call, forKey: "image")
+                
+                let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+                    guard let `self` = self else { return }
+                    let service = self.services[indexPath.row]
+                    StorageManager.deleteObject(service)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+                
+                delete.setValue(UIImage.delete, forKey: "image")
+                
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+                
+                alertController.addAction(call)
+                alertController.addAction(delete)
+                alertController.addAction(cancel)
+                
+                present(alertController, animated: true)
+            }
+        }
     }
     
 }

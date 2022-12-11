@@ -39,7 +39,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eJu-D7-Uk8">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.up.arrow.down" catalog="system" id="H1O-h6-hb7">
                             <connections>
-                                <action selector="sorting:" destination="A53-7f-5g8" id="oQI-jl-hOF"/>
+                                <action selector="sorting:" destination="A53-7f-5g8" id="vHt-wR-Cdv"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="L2d-DL-boz">
@@ -88,7 +88,9 @@
                                     <constraint firstAttribute="height" constant="30" id="JDN-ok-XcK"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="Location"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="Location" symbolScale="large"/>
+                                </state>
                                 <connections>
                                     <action selector="centerViewInUserLocation" destination="wYl-mc-WpN" eventType="touchUpInside" id="iPT-of-jZl"/>
                                 </connections>
@@ -238,14 +240,14 @@
             <objects>
                 <viewController id="fhD-lO-sEU" customClass="NewServiceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mkH-EC-o6P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgp-DO-wA1">
-                                <rect key="frame" x="14" y="56" width="386" height="782"/>
+                                <rect key="frame" x="14" y="144" width="386" height="718"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-w0-6sI" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="386" height="784"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="386" height="774"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ehx-Tr-8sO">
                                                 <rect key="frame" x="0.0" y="0.0" width="386" height="386"/>
@@ -329,19 +331,31 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hr5-md-E74">
-                                                <rect key="frame" x="83" y="676" width="220" height="88"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tpu-5Q-kBe">
+                                                <rect key="frame" x="10" y="666" width="366" height="88"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate the service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-iZ-4V5">
-                                                        <rect key="frame" x="43.5" y="0.0" width="133" height="24"/>
-                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-1e-kDC" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="44" width="220" height="44"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hr5-md-E74">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="88"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate the service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-iZ-4V5">
+                                                                <rect key="frame" x="116.5" y="0.0" width="133" height="24"/>
+                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-1e-kDC" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
+                                                                <rect key="frame" x="73" y="44" width="220" height="44"/>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="hr7-1e-kDC" secondAttribute="bottom" constant="20" id="VEf-ZH-hJc"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="hr5-md-E74" firstAttribute="centerY" secondItem="tpu-5Q-kBe" secondAttribute="centerY" id="HEd-7X-dwH"/>
+                                                    <constraint firstItem="hr5-md-E74" firstAttribute="centerX" secondItem="tpu-5Q-kBe" secondAttribute="centerX" id="rUb-Ab-MS7"/>
+                                                </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djw-2u-FR7">
                                                 <rect key="frame" x="336" y="10" width="40" height="40"/>
@@ -386,12 +400,13 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="tpu-5Q-kBe" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="0u4-fa-cVZ"/>
                                             <constraint firstItem="FNc-5q-bYX" firstAttribute="top" secondItem="ehx-Tr-8sO" secondAttribute="bottom" constant="10" id="1sp-i8-mTB"/>
                                             <constraint firstItem="zCf-SS-eBU" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="408-VS-6UM"/>
-                                            <constraint firstAttribute="bottom" secondItem="hr5-md-E74" secondAttribute="bottom" constant="20" id="5Dk-tY-7zA"/>
-                                            <constraint firstItem="hr5-md-E74" firstAttribute="top" secondItem="zCf-SS-eBU" secondAttribute="bottom" constant="20" id="7s4-xP-cwe"/>
+                                            <constraint firstItem="tpu-5Q-kBe" firstAttribute="top" secondItem="zCf-SS-eBU" secondAttribute="bottom" constant="10" id="7Wu-L3-cjV"/>
                                             <constraint firstAttribute="trailing" secondItem="Gno-ub-5nT" secondAttribute="trailing" constant="10" id="A6X-G8-eCR"/>
                                             <constraint firstItem="SRP-b6-UGK" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="AY0-Pm-CNs"/>
+                                            <constraint firstAttribute="bottom" secondItem="tpu-5Q-kBe" secondAttribute="bottom" constant="20" id="B4M-UE-gIg"/>
                                             <constraint firstAttribute="trailing" secondItem="djw-2u-FR7" secondAttribute="trailing" constant="10" id="Cr0-kl-Vx5"/>
                                             <constraint firstAttribute="trailing" secondItem="zCf-SS-eBU" secondAttribute="trailing" constant="10" id="FCR-bG-5bk"/>
                                             <constraint firstItem="FNc-5q-bYX" firstAttribute="leading" secondItem="dNf-w0-6sI" secondAttribute="leading" constant="10" id="FTA-7k-CWr"/>
@@ -403,11 +418,11 @@
                                             <constraint firstAttribute="trailing" secondItem="ehx-Tr-8sO" secondAttribute="trailing" id="SDT-Uo-rZv"/>
                                             <constraint firstItem="djw-2u-FR7" firstAttribute="top" secondItem="dNf-w0-6sI" secondAttribute="top" constant="10" id="WFN-Qb-SIS"/>
                                             <constraint firstItem="ehx-Tr-8sO" firstAttribute="top" secondItem="dNf-w0-6sI" secondAttribute="top" id="ghF-Br-TyI"/>
-                                            <constraint firstItem="hr5-md-E74" firstAttribute="centerX" secondItem="dNf-w0-6sI" secondAttribute="centerX" id="hHI-5Q-mxa"/>
                                             <constraint firstAttribute="trailing" secondItem="FNc-5q-bYX" secondAttribute="trailing" constant="10" id="ipv-OX-jet"/>
                                             <constraint firstItem="SRP-b6-UGK" firstAttribute="top" secondItem="FNc-5q-bYX" secondAttribute="bottom" constant="10" id="kDP-CZ-Iso"/>
                                             <constraint firstItem="zCf-SS-eBU" firstAttribute="top" secondItem="tob-l4-rE1" secondAttribute="bottom" constant="10" id="o75-kE-aK6"/>
                                             <constraint firstAttribute="trailing" secondItem="zMX-F5-OGz" secondAttribute="trailing" constant="10" id="ofu-Jc-Km4"/>
+                                            <constraint firstAttribute="trailing" secondItem="tpu-5Q-kBe" secondAttribute="trailing" constant="10" id="pjA-pu-vrs"/>
                                             <constraint firstAttribute="trailing" secondItem="SRP-b6-UGK" secondAttribute="trailing" constant="10" id="vwE-hY-h7s"/>
                                             <constraint firstItem="tob-l4-rE1" firstAttribute="top" secondItem="SRP-b6-UGK" secondAttribute="bottom" constant="10" id="y22-RO-wQr"/>
                                         </constraints>
@@ -447,6 +462,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentView" destination="dNf-w0-6sI" id="mzN-Y4-xlU"/>
+                        <outlet property="rateService" destination="hr5-md-E74" id="eqg-pn-1li"/>
                         <outlet property="ratingControl" destination="hr7-1e-kDC" id="DoB-6D-PpF"/>
                         <outlet property="saveButton" destination="8v2-6I-3p8" id="Knk-Qb-FOW"/>
                         <outlet property="scrollView" destination="rgp-DO-wA1" id="eoB-WA-9vb"/>
@@ -469,7 +485,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="4YV-kE-5wa"/>
+        <segue reference="esa-ki-mj7"/>
         <segue reference="cyZ-eK-Yf6"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -477,7 +493,7 @@
         <image name="GetDirection" width="50" height="50"/>
         <image name="Location" width="128" height="128"/>
         <image name="Map" width="170.5" height="170.5"/>
-        <image name="Pin" width="42" height="42"/>
+        <image name="Pin" width="136" height="200"/>
         <image name="Placeholder" width="133" height="133"/>
         <image name="arrow.up.arrow.down" catalog="system" width="128" height="97"/>
         <image name="mappin.and.ellipse" catalog="system" width="117" height="128"/>

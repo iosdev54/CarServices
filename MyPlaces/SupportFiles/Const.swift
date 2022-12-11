@@ -18,7 +18,7 @@ enum Const {
             switch self {
             case.empty: return "EmptyOilDrop"
             case .filled: return "FilledOilDrop"
-            case .highlighted: return "HighlightedStar"
+            case .highlighted: return "HighlightedOilDrop"
             }
         }
         

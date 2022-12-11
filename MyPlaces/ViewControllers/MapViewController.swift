@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
+//MARK: - Protocol MapViewControllerDelegate
 protocol MapViewControllerDelegate {
     func getAddress(_ address: String? )
 }
@@ -16,12 +17,12 @@ protocol MapViewControllerDelegate {
 class MapViewController: UIViewController {
     
     //MARK: - Private constants
-    private let segueIdentifierShowPlace = "showService"
+    private let segueIdentifierShowService = "showService"
     private let annotationIdentifier = "annotationIdentifier"
 
     private let mapManager = MapManager()
     var mapViewControllerDelegate: MapViewControllerDelegate?
-    var place = Service()
+    var service = Service()
     
     var incomeSegueIdentifier = ""
     
@@ -75,8 +76,8 @@ class MapViewController: UIViewController {
         } completion: { distance, timeInterval in
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
-                self.distanceLabel.text = "Растояние до места - \(distance) км"
-                self.timeIntervalLabel.text = "Время в пути - \(timeInterval) мин"
+                self.distanceLabel.text = "Distance to service - \(distance) km"
+                self.timeIntervalLabel.text = "Travel time - \(timeInterval) min"
             }
         }
         
@@ -91,13 +92,14 @@ class MapViewController: UIViewController {
         goButton.isHidden = true
         distanceLabel.isHidden = true
         timeIntervalLabel.isHidden = true
+        doneButton.isEnabled = false
         
         mapManager.checkLocationServises(mapView: mapView, segueIdentifier: incomeSegueIdentifier) {
             mapManager.locationManager.delegate = self
         }
         
-        if incomeSegueIdentifier == segueIdentifierShowPlace {
-            mapManager.setupPlaceMark(place: place, mapView: mapView)
+        if incomeSegueIdentifier == segueIdentifierShowService {
+            mapManager.setupPlaceMark(place: service, mapView: mapView)
             mapPinImage.isHidden = true
             addressLabel.isHidden = true
             doneButton.isHidden = true
@@ -108,6 +110,7 @@ class MapViewController: UIViewController {
     }
 }
 
+//MARK: - MKMapViewDelegate
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -120,7 +123,7 @@ extension MapViewController: MKMapViewDelegate {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.canShowCallout = true
         }
-        if let imageData = place.imageData {
+        if let imageData = service.imageData {
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
             imageView.layer.cornerRadius = 10
             imageView.clipsToBounds = true
@@ -137,7 +140,7 @@ extension MapViewController: MKMapViewDelegate {
         
         let geocoder = CLGeocoder()
         
-        if incomeSegueIdentifier == segueIdentifierShowPlace && previousLocation != nil {
+        if incomeSegueIdentifier == segueIdentifierShowService && previousLocation != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 guard let `self` = self else { return }
                 self.mapManager.showUserLocation(mapView: mapView)
@@ -161,16 +164,19 @@ extension MapViewController: MKMapViewDelegate {
                 guard let `self` = self else { return }
                 if cityName != nil, streetName != nil, buildNumber != nil {
                     self.addressLabel.text = "\(cityName!), \(streetName!), \(buildNumber!)"
+                    self.doneButton.isEnabled = true
                 } else if cityName != nil, streetName != nil {
                     self.addressLabel.text = "\(cityName!), \(streetName!)"
+                    self.doneButton.isEnabled = true
                 } else {
                     self.addressLabel.text = ""
+                    self.doneButton.isEnabled = false
                 }
             }
         }
     }
     
-    //    Для отображения маршрута на карте
+    // Для отображения маршрута на карте
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -180,6 +186,7 @@ extension MapViewController: MKMapViewDelegate {
     }
 }
 
+//MARK: - CLLocationManagerDelegate
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
