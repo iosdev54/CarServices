@@ -50,8 +50,9 @@ class CarServiceTableViewCell: UITableViewCell {
     }
     
     @IBAction func phoneTapped(_ sender: UIButton) {
-        print("Phone Tapped")
+        
+        guard let servicePhone = phoneLabel.text else { return }
+        CallManager().callNumber(phoneNumber: servicePhone)
     }
-    
     
 }

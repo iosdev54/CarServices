@@ -82,11 +82,6 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
     
-//    @IBAction func sorting(_ sender: UIBarButtonItem) {
-//
-////        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortFunction())
-//    }
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -186,14 +181,14 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
 
 //MARK: - Create sort menu
 extension MainViewController {
-
+    
     private func addMenuToSortButton() {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortMenu())
     }
     
     private func sortMenu() -> UIMenu {
-
+        
         let ascending = UIAction( title: "Asсending", image: UIImage.ascending) { [weak self] _ in
             guard let `self` = self else { return }
             self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: true)
@@ -219,10 +214,10 @@ extension MainViewController {
             self.services = self.services.sorted(byKeyPath: self.ratingKeyPath, ascending: false)
             self.tableView.reloadData()
         }
-
+        
         let menuActions = [ascending, descending, latest, oldest, rating]
         let menu = UIMenu(children: menuActions)
-
+        
         return menu
     }
 }
@@ -248,16 +243,15 @@ extension MainViewController {
                 
                 let call = UIAlertAction(title: "Call", style: .default) { [weak self] _ in
                     guard let `self` = self else { return }
-                    print("Call")
+                    guard let servicePhone = self.services[indexPath.row].phone else { return }
+                    CallManager().callNumber(phoneNumber: servicePhone)
                 }
-            
+                
                 call.setValue(UIImage.call, forKey: "image")
                 
                 let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
                     guard let `self` = self else { return }
-                    let service = self.services[indexPath.row]
-                    StorageManager.deleteObject(service)
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.showAlert(indexPath: indexPath)
                 }
                 
                 delete.setValue(UIImage.delete, forKey: "image")
@@ -271,6 +265,21 @@ extension MainViewController {
                 present(alertController, animated: true)
             }
         }
+    }
+    
+    private func showAlert(indexPath: IndexPath) {
+        
+        let alert = UIAlertController(title: "Are you sure you want to delete the service?", message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let `self` = self else { return }
+            let service = self.services[indexPath.row]
+            StorageManager.deleteObject(service)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     
 }
