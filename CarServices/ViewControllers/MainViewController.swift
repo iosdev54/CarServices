@@ -49,6 +49,8 @@ class MainViewController: UIViewController {
         customTitleInNavBar()
         
         longPressAction(with: tableView)
+        
+        addMenuToSortButton()
     }
     
     private func customTitleInNavBar() {
@@ -80,10 +82,10 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func sorting(_ sender: UIBarButtonItem) {
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortFunction())
-    }
+//    @IBAction func sorting(_ sender: UIBarButtonItem) {
+//
+////        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortFunction())
+//    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -182,11 +184,16 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
 }
 
-//MARK: - Sorting function
+//MARK: - Create sort menu
 extension MainViewController {
-    
-    private func sortFunction() -> UIMenu {
+
+    private func addMenuToSortButton() {
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.leftBarImage, menu: sortMenu())
+    }
+    
+    private func sortMenu() -> UIMenu {
+
         let ascending = UIAction( title: "Asсending", image: UIImage.ascending) { [weak self] _ in
             guard let `self` = self else { return }
             self.services = self.services.sorted(byKeyPath: self.nameKeyPath, ascending: true)
@@ -212,10 +219,10 @@ extension MainViewController {
             self.services = self.services.sorted(byKeyPath: self.ratingKeyPath, ascending: false)
             self.tableView.reloadData()
         }
-        
+
         let menuActions = [ascending, descending, latest, oldest, rating]
         let menu = UIMenu(children: menuActions)
-        
+
         return menu
     }
 }

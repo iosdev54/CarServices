@@ -14,7 +14,7 @@
         <!--Main View Controller-->
         <scene sceneID="4GW-fY-g1X">
             <objects>
-                <viewController id="A53-7f-5g8" customClass="MainViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A53-7f-5g8" customClass="MainViewController" customModule="CarServices" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rMe-8N-TCN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,11 +37,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eJu-D7-Uk8">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.up.arrow.down" catalog="system" id="H1O-h6-hb7">
-                            <connections>
-                                <action selector="sorting:" destination="A53-7f-5g8" id="vHt-wR-Cdv"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.up.arrow.down" catalog="system" id="H1O-h6-hb7"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="L2d-DL-boz">
                             <connections>
                                 <segue destination="8Fn-NY-LeR" kind="presentation" identifier="NewService" id="kph-Og-xXd"/>
@@ -60,7 +56,7 @@
         <!--Map View Controller-->
         <scene sceneID="kJh-it-cWn">
             <objects>
-                <viewController storyboardIdentifier="MapVC" id="wYl-mc-WpN" customClass="MapViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapVC" id="wYl-mc-WpN" customClass="MapViewController" customModule="CarServices" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gJt-W8-9lU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,7 +234,7 @@
         <!--Add New Service-->
         <scene sceneID="WCQ-Uw-4Qr">
             <objects>
-                <viewController id="fhD-lO-sEU" customClass="NewServiceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fhD-lO-sEU" customClass="NewServiceViewController" customModule="CarServices" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mkH-EC-o6P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,7 +339,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-1e-kDC" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="hr7-1e-kDC" customClass="RatingControl" customModule="CarServices" customModuleProvider="target">
                                                                 <rect key="frame" x="57" y="44" width="252" height="44"/>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjz-fw-whi">
@@ -371,9 +367,6 @@
                                                 <state key="normal">
                                                     <imageReference key="image" image="plus.circle" catalog="system" symbolScale="large"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="addImageAction:" destination="fhD-lO-sEU" eventType="touchUpInside" id="A0V-0j-v4c"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gno-ub-5nT">
                                                 <rect key="frame" x="326" y="326" width="50" height="50"/>
@@ -465,6 +458,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addNewImageButton" destination="djw-2u-FR7" id="a1j-cd-U0u"/>
                         <outlet property="contentView" destination="dNf-w0-6sI" id="mzN-Y4-xlU"/>
                         <outlet property="rateService" destination="hr5-md-E74" id="eqg-pn-1li"/>
                         <outlet property="ratingControl" destination="hr7-1e-kDC" id="DoB-6D-PpF"/>

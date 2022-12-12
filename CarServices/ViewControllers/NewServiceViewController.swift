@@ -35,6 +35,7 @@ class NewServiceViewController: UIViewController {
     @IBOutlet weak var servicePhone: UITextField!
     @IBOutlet weak var rateService: UIStackView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var addNewImageButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,8 @@ class NewServiceViewController: UIViewController {
         hideKeyboardWhenTappedAround()
         
         showAndHideKeyboard()
+        
+        addMenuToAddButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,24 +126,6 @@ class NewServiceViewController: UIViewController {
         saveButton.isEnabled = true
     }
     
-    @IBAction func addImageAction(_ sender: UIButton) {
-        
-        let camera = UIAction( title: "Camera", image: UIImage(systemName: "camera")) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.chooseImagePicker(sourse: .camera)
-        }
-        
-        let photo = UIAction( title: "Photo", image: UIImage(systemName: "photo")) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.chooseImagePicker(sourse: .photoLibrary)
-        }
-        let menuActions = [camera, photo]
-        let menu = UIMenu( title: "Select sourse of photo", children: menuActions)
-        
-        sender.showsMenuAsPrimaryAction = true
-        sender.menu = menu
-    }
-    
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
@@ -197,7 +182,7 @@ extension NewServiceViewController: UITextFieldDelegate {
 //MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension NewServiceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
+    private func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourse) {
             
             let imagePicker = UIImagePickerController()
@@ -264,4 +249,31 @@ extension NewServiceViewController {
         scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
     
+}
+
+//MARK: - Create selection menu
+extension NewServiceViewController {
+
+    private func addMenuToAddButton() {
+       
+        addNewImageButton.menu = selectionMenu()
+        addNewImageButton.showsMenuAsPrimaryAction = true
+    }
+
+    private func selectionMenu() -> UIMenu {
+        
+        let camera = UIAction( title: "Camera", image: UIImage(systemName: "camera")) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.chooseImagePicker(sourse: .camera)
+        }
+        
+        let photo = UIAction( title: "Photo", image: UIImage(systemName: "photo")) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.chooseImagePicker(sourse: .photoLibrary)
+        }
+        let menuActions = [camera, photo]
+        let menu = UIMenu( title: "Select sourse of photo", children: menuActions)
+        
+        return menu
+    }
 }
