@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PlaceholderService.png",
+      "filename" : "ServiceImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "PlaceholderService@2x.png",
+      "filename" : "ServiceImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "PlaceholderService@3x.png",
+      "filename" : "ServiceImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
