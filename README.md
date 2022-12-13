@@ -1,10 +1,11 @@
-# MyPlaces
-### The My Places PET project is designed to save your favorite places.
+# Car Services
+### The CarServices PET project is designed to save your favorite car services.
 
 __Capabilities:__
 * Sorting
+* Call the service
 * Rating
-* Change of location
+* Selecting a location on the map
 * View location on the map
 * View your location on a map
 * Route planning
@@ -12,11 +13,13 @@ __Capabilities:__
 
 __Screenshots:__
 
-![1](https://user-images.githubusercontent.com/107141073/205504885-a0246db8-16ef-4f73-ac07-8155997bc1a2.png)
-![2](https://user-images.githubusercontent.com/107141073/205504637-733e4775-0896-4b4f-859c-a1dd9473173c.png)
-![3](https://user-images.githubusercontent.com/107141073/205504641-6a0cffda-5cc8-455d-8298-816f91d4611c.png)
-![4](https://user-images.githubusercontent.com/107141073/205504646-15f1bac9-3473-4555-8b31-34643baecdd1.png)
-![5](https://user-images.githubusercontent.com/107141073/205504649-f7925a50-15a1-442c-ae02-156fb26d8a2a.png)
-![6](https://user-images.githubusercontent.com/107141073/205504652-7873662c-ec6c-4f0e-8974-3d6bef9fe1d0.png)
-![7](https://user-images.githubusercontent.com/107141073/205504659-4a5ae273-726d-46fd-a79d-19c86758a55a.png)
-![8](https://user-images.githubusercontent.com/107141073/205504850-1b5331d9-fc2d-45eb-a78d-962221b70d0f.png)
+![1](https://user-images.githubusercontent.com/107141073/207344411-29d124ce-cfff-4fca-a186-161e71be54a7.png)
+![2](https://user-images.githubusercontent.com/107141073/207344426-44b89084-8a3d-4c11-9137-86495650632c.png)
+![3](https://user-images.githubusercontent.com/107141073/207344432-b6e5d673-5ea2-46fe-8813-33a4f6f917d8.png)
+![4](https://user-images.githubusercontent.com/107141073/207344440-46930bcf-95b0-4b2f-93e5-a7d66220b980.png)
+![5](https://user-images.githubusercontent.com/107141073/207344453-0ce25918-f731-4fa3-80b6-7562df9d632f.png)
+![6](https://user-images.githubusercontent.com/107141073/207344461-e2cce2f6-7a31-4025-93ec-67434b491e8c.png)
+![7](https://user-images.githubusercontent.com/107141073/207344468-3e75fcd3-2de4-4e27-8669-800579bbd6db.png)
+![8](https://user-images.githubusercontent.com/107141073/207344480-4af25698-90cd-4558-97f6-611dd9310368.png)
+![9](https://user-images.githubusercontent.com/107141073/207344492-004d232d-2574-4618-8249-60fd7b4e081b.png)
+![10](https://user-images.githubusercontent.com/107141073/207344507-8fde1779-1ccb-4b66-a9e8-772fb4485e50.png)
