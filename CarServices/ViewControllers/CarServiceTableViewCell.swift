@@ -9,9 +9,11 @@ import UIKit
 
 class CarServiceTableViewCell: UITableViewCell {
     
+    var callManager: CallManager?
+    
     @IBOutlet weak var imageOfService: UIImageView! {
         didSet {
-            imageOfService.makeCorner(with: 10)
+            imageOfService.makeCorner(cornerRadius: 10)
         }
     }
     
@@ -31,13 +33,13 @@ class CarServiceTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //set the values for top,left,bottom,right margins
+        //set the values for top, left, bottom, right margins
         let margins = UIEdgeInsets(top: 7, left: 14, bottom: 7, right: 14)
         contentView.frame = contentView.frame.inset(by: margins)
-        contentView.makeCorner(with: 10)
+        contentView.makeCorner(cornerRadius: 10)
     }
     
-    func configureCell(indexPath: IndexPath, servise: Service) {
+    func configureCell(indexPath: IndexPath, servise: Service, callManager: CallManager) {
         
         nameLabel.text = servise.name
         typeLabel.text = servise.type
@@ -47,12 +49,14 @@ class CarServiceTableViewCell: UITableViewCell {
         
         imageOfService.image = UIImage(data: servise.imageData!)
         contentMode = .scaleAspectFill
+        
+        self.callManager = callManager
     }
     
     @IBAction func phoneTapped(_ sender: UIButton) {
         
         guard let servicePhone = phoneLabel.text else { return }
-        CallManager().callNumber(phoneNumber: servicePhone)
+        callManager?.callNumber(phoneNumber: servicePhone)
     }
     
 }

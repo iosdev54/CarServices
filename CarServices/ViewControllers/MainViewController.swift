@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private var services: Results<Service>!
     private var filteredServices: Results<Service>!
+    private let callManager = CallManager()
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -111,7 +112,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         let service = isFiltering ? filteredServices[indexPath.row] : services[indexPath.row]
         
-        cell.configureCell(indexPath: indexPath, servise: service)
+        cell.configureCell(indexPath: indexPath, servise: service, callManager: callManager)
         
         return cell
     }
@@ -148,10 +149,10 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        filterContentForSearchTaxt(searchController.searchBar.text!)
+        filterContentForSearchText(searchController.searchBar.text!)
     }
     
-    private func filterContentForSearchTaxt(_ searchText: String) {
+    private func filterContentForSearchText(_ searchText: String) {
         
         switch searchController.searchBar.selectedScopeButtonIndex {
         case 0: filteredServices = services.filter(sortByName, searchText)
@@ -244,7 +245,7 @@ extension MainViewController {
                 let call = UIAlertAction(title: "Call", style: .default) { [weak self] _ in
                     guard let `self` = self else { return }
                     guard let servicePhone = self.services[indexPath.row].phone else { return }
-                    CallManager().callNumber(phoneNumber: servicePhone)
+                    self.callManager.callNumber(phoneNumber: servicePhone)
                 }
                 
                 call.setValue(UIImage.call, forKey: "image")

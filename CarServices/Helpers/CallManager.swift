@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CallManager {
+class CallManager {
     
     func callNumber(phoneNumber: String) {
         
@@ -26,12 +26,13 @@ struct CallManager {
     private func showAlert() {
         
         let alert = UIAlertController(title: "No number or wrong number", message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(cancel)
         activeVC()?.present(alert, animated: true)
     }
     
     private func activeVC() -> UIViewController? {
+       
         // Use connectedScenes to find the .foregroundActive rootViewController
         var rootVC: UIViewController?
         for scene in UIApplication.shared.connectedScenes {

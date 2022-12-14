@@ -81,7 +81,6 @@
 				18E6AC232934D924002FC651 /* MapViewController.swift */,
 				185768E8293E0CCB00CFA8AE /* CarServiceTableViewCell.swift */,
 				185768E9293E0CCB00CFA8AE /* CarServiceTableViewCell.xib */,
-				18303E932939F9AF001650EF /* Helpers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -152,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				18303E902939F926001650EF /* ViewControllers */,
+				18303E932939F9AF001650EF /* Helpers */,
 				18303E912939F978001650EF /* Models */,
 				18303E942939FA0C001650EF /* SupportFiles */,
 				18303E952939FA45001650EF /* InterfaceBuilder */,

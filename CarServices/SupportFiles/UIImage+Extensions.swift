@@ -25,5 +25,8 @@ extension UIImage {
     //Icon for the alertController
     static let call = UIImage(systemName: "iphone")
     static let delete = UIImage(systemName: "trash")
-        
+    
+    //Icon for the menu when choose a new image
+    static let camera = UIImage(systemName: "camera")
+    static let photo  = UIImage(systemName: "photo")
 }

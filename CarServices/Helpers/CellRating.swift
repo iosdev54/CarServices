@@ -74,10 +74,10 @@ import UIKit
         for (index, imageView) in ratingImageView.enumerated() {
             
             let bundle = Bundle(for: type(of: self))
-            let filledStar = UIImage(named: Const.oilDropImage.filled.name, in: bundle, compatibleWith: self.traitCollection)
+            let filledDrop = UIImage(named: Const.oilDropImage.filled.name, in: bundle, compatibleWith: self.traitCollection)
             
             if index < rating {
-                imageView.image = filledStar
+                imageView.image = filledDrop
             }
         }
     }

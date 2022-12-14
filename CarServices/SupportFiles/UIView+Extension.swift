@@ -19,8 +19,8 @@ extension UIView {
         layer.shadowRadius = 4.0
     }
     
-    func makeCorner(with radius: CGFloat) {
-        layer.cornerRadius = radius
+    func makeCorner(cornerRadius: CGFloat) {
+        layer.cornerRadius = cornerRadius
         layer.masksToBounds = true
         layer.isOpaque = false
     }

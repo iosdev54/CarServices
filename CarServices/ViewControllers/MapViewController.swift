@@ -80,7 +80,6 @@ class MapViewController: UIViewController {
                 self.timeIntervalLabel.text = "Travel time - \(timeInterval) min"
             }
         }
-        
     }
     
     @IBAction func closeVC() {

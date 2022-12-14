@@ -23,7 +23,7 @@ class NewServiceViewController: UIViewController {
     
     @IBOutlet weak var contentView: UIView! {
         didSet {
-            contentView.makeCorner(with: 10)
+            contentView.makeCorner(cornerRadius: 10)
         }
     }
 
@@ -262,12 +262,12 @@ extension NewServiceViewController {
 
     private func selectionMenu() -> UIMenu {
         
-        let camera = UIAction( title: "Camera", image: UIImage(systemName: "camera")) { [weak self] _ in
+        let camera = UIAction( title: "Camera", image: UIImage.camera) { [weak self] _ in
             guard let `self` = self else { return }
             self.chooseImagePicker(sourse: .camera)
         }
         
-        let photo = UIAction( title: "Photo", image: UIImage(systemName: "photo")) { [weak self] _ in
+        let photo = UIAction( title: "Photo", image: UIImage.photo) { [weak self] _ in
             guard let `self` = self else { return }
             self.chooseImagePicker(sourse: .photoLibrary)
         }
