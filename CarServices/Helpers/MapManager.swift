@@ -58,9 +58,8 @@ class MapManager {
             closure()
         } else {
             //Алерт отображается если геолокация отключена глобально для всего устройства
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                guard let `self` = self else { return }
-                self.showAlert(title: "Location Services are Disabled", message: "To enable it go: Settings -> Privacy -> Location Services and turn On.")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                AlertManager.showAlert(title: "Location Services are Disabled", message: "To enable it go: Settings -> Privacy -> Location Services and turn On.")
             }
         }
     }
@@ -77,17 +76,16 @@ class MapManager {
             }
             break
         case .denied:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                guard let `self` = self else { return }
-                self.showAlert(title: "Your Location is not Available", message: "To give permission Go to: Settings -> CarServices -> Location")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                AlertManager.showAlert(title: "Your Location is not Available", message: "To give permission go to: Settings -> CarServices -> Location")
+                
             }
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                guard let `self` = self else { return }
-                self.showAlert(title: "Your Location is not Available", message: "To give permission Go to: Settings -> CarServices -> Location")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                AlertManager.showAlert(title: "Your Location is not Available", message: "To give permission go to: Settings -> CarServices -> Location")
             }
             break
         case .authorizedAlways:
@@ -101,7 +99,7 @@ class MapManager {
     func showUserLocation(mapView: MKMapView) {
         
         guard let location = locationManager.location?.coordinate else {
-            showAlert(title: "Error", message: "Current location is not found.")
+            AlertManager.showAlert(title: "Error", message: "Current location is not found.")
             return
         }
         let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMetters, longitudinalMeters: regionInMetters)
@@ -113,7 +111,7 @@ class MapManager {
     func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> (), completion: @escaping (_ distance: String, _ timeInterval: Int) -> ()) {
         
         guard let location = locationManager.location?.coordinate else {
-            showAlert(title: "Error", message: "Current location is not found.")
+            AlertManager.showAlert(title: "Error", message: "Current location is not found.")
             return }
         
         locationManager.startUpdatingLocation()
@@ -121,7 +119,7 @@ class MapManager {
         previousLocation(CLLocation(latitude: location.latitude, longitude: location.longitude))
         
         guard let request = createDirectionsRequest(from: location) else {
-            showAlert(title: "Error", message: "Destination is not found.")
+            AlertManager.showAlert(title: "Error", message: "Destination is not found.")
             return
         }
         let directions = MKDirections(request: request)
@@ -129,14 +127,13 @@ class MapManager {
         //Удаляем все текущие маршруты, которые были созданы ранее
         resetMapView(withNew: directions, mapView: mapView)
         
-        directions.calculate { [weak self] responce, error in
-            guard let `self` = self else { return }
+        directions.calculate { responce, error in
             if let error = error {
                 print(error)
                 return
             }
             guard let responce = responce else {
-                self.showAlert(title: "Error", message: "The route is not available.")
+                AlertManager.showAlert(title: "Error", message: "The route is not available.")
                 return }
             
             //For each route
@@ -207,31 +204,6 @@ class MapManager {
         let longitude = mapView.centerCoordinate.longitude
         
         return CLLocation(latitude: latitude, longitude: longitude)
-    }
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(okAction)
-        
-        activeVC()?.present(alert, animated: true)
-    }
-    
-    private func activeVC() -> UIViewController? {
-        // Use connectedScenes to find the .foregroundActive rootViewController
-        var rootVC: UIViewController?
-        for scene in UIApplication.shared.connectedScenes {
-            if scene.activationState == .foregroundActive {
-                rootVC = (scene.delegate as? UIWindowSceneDelegate)?.window!!.rootViewController
-                break
-            }
-        }
-        // Then, find the topmost presentedVC from it.
-        var presentedVC = rootVC
-        while presentedVC?.presentedViewController != nil {
-            presentedVC = presentedVC?.presentedViewController
-        }
-        return presentedVC
     }
     
 }

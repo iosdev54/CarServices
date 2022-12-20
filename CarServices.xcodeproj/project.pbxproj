@@ -27,6 +27,7 @@
 		18C9B6CD292AA2CA0071B070 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 18C9B6CC292AA2CA0071B070 /* .gitignore */; };
 		18C9B6CF292B8E8E0071B070 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6CE292B8E8E0071B070 /* MainViewController.swift */; };
 		18C9B6D3292BF0580071B070 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9B6D2292BF0580071B070 /* ServiceModel.swift */; };
+		18CB3088294F86CC00A5493A /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3087294F86CC00A5493A /* AlertManager.swift */; };
 		18E29820293CE7EC00707610 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2981F293CE7EC00707610 /* Const.swift */; };
 		18E29824293CF21000707610 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29823293CF21000707610 /* UIFont+Extensions.swift */; };
 		18E29826293CF31D00707610 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E29825293CF31D00707610 /* UIImage+Extensions.swift */; };
@@ -54,6 +55,7 @@
 		18C9B6CC292AA2CA0071B070 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		18C9B6CE292B8E8E0071B070 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		18C9B6D2292BF0580071B070 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
+		18CB3087294F86CC00A5493A /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		18E2981F293CE7EC00707610 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		18E29823293CF21000707610 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		18E29825293CF31D00707610 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				18A67F8C293276630055DBD3 /* CellRating.swift */,
 				18303E8D2938F738001650EF /* MapManager.swift */,
 				18B0267A2947A3F00090A195 /* CallManager.swift */,
+				18CB3087294F86CC00A5493A /* AlertManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				18C9B6B9292AA2A50071B070 /* AppDelegate.swift in Sources */,
 				18E6AC242934D925002FC651 /* MapViewController.swift in Sources */,
 				18B026792947A0660090A195 /* String+Extension.swift in Sources */,
+				18CB3088294F86CC00A5493A /* AlertManager.swift in Sources */,
 				18B72DE0292D358A00296BF0 /* StorageManager.swift in Sources */,
 				18E29820293CE7EC00707610 /* Const.swift in Sources */,
 				18303E8E2938F738001650EF /* MapManager.swift in Sources */,

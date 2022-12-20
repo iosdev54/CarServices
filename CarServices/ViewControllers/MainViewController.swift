@@ -126,10 +126,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return 170
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
 }
 
 //MARK: - UISearchController
